@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hearthshire</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background: #1f2a1f;
+      color: #f5f1e8;
+      line-height: 1.6;
+    }
+
+    header {
+      height: 100vh;
+      background: linear-gradient(
+          rgba(0,0,0,0.45),
+          rgba(0,0,0,0.45)
+        ),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin-top: 20px;
+      color: #e6dfd2;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #2b382b;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #d7c7a3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: #b7b0a2;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Hearthshire</h1>
+
+    <p class="subtitle">
+      A digital hearth for the chronicles of a quiet house,
+      stubborn engineering, garden seasons and small domestic victories.
+    </p>
+  </header>
+
+  <section class="container">
+    <div class="cards">
+
+      <div class="card">
+        <h2>🏡 The Estate</h2>
+        <p>
+          House systems, maintenance, seasonal tasks and engineering lore.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>💧 Water & Filters</h2>
+        <p>
+          Water treatment cycles, filter replacements and septic chronicles.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>🌿 Garden</h2>
+        <p>
+          Seasons, plants, lawn battles and quiet evenings outdoors.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>📜 Chronicle</h2>
+        <p>
+          Photos, memories, guests, storms and small moments of life.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    Hearthshire • Established 2026
+  </footer>
+
+</body>
+</html>

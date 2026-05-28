@@ -40,13 +40,13 @@ header {
   overflow: hidden;
 }
 
-/* 🌅 ФОН (двигается через JS) */
+/* 🌅 ФОН */
 .parallax-bg {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 120%; /* чуть больше, чтобы не было пустот */
+  height: 120%;
 
   background-image:
     linear-gradient(
@@ -64,20 +64,27 @@ header {
   z-index: 0;
 }
 
-/* затемнение глубины */
-header::after {
-  content: "";
+/* 🏡 “ЖИВОЙ ДОМ” — отдельный слой */
+.living-house {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
 
-  background: radial-gradient(
-    circle at center,
-    transparent 30%,
-    rgba(0,0,0,0.4)
-  );
+  background-image: url('./hearthshire-sun.png'); 
+  /* если есть отдельная версия дома — можно заменить */
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0.0; 
+  /* 👆 сейчас невидим как слой, но участвует в движении */
 
   z-index: 1;
-  pointer-events: none;
+
+  transform: translateY(0px) scale(1);
 }
 
 /* текст */
@@ -152,6 +159,7 @@ footer {
 <header>
 
 <div class="parallax-bg"></div>
+<div class="living-house"></div>
 
 <h1>Heartshire</h1>
 
@@ -196,12 +204,19 @@ Built with tea, mud, persistence and questionable optimism.
 
 <script>
 const bg = document.querySelector('.parallax-bg');
+const house = document.querySelector('.living-house');
 
 window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
+  const y = window.scrollY;
 
-  // мягкий параллакс (очень лёгкий, не “игровой”)
-  bg.style.transform = `translateY(${scrollY * 0.3}px)`;
+  // 🌅 фон — медленный параллакс
+  bg.style.transform = `translateY(${y * 0.25}px)`;
+
+  // 🏡 “живой дом” — ещё более мягкая реакция
+  house.style.transform = `
+    translateY(${y * 0.15}px)
+    scale(1.02)
+  `;
 });
 </script>
 

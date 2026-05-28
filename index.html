@@ -19,17 +19,6 @@ body {
   );
 
   color: #f7ece7;
-
-  /* центрируем страницу */
-  display: flex;
-  justify-content: center;
-}
-
-/* ОБЁРТКА САЙТА */
-.page {
-  width: 100%;
-  max-width: 1100px;
-  padding: 0 10px;
 }
 
 /* HEADER */
@@ -57,7 +46,7 @@ header {
 
   padding: 20px 20px 80px 20px;
 
-  /* мягкое растворение вниз */
+  /* 🌅 мягкое растворение вниз */
   mask-image: linear-gradient(
     to bottom,
     black 70%,
@@ -71,7 +60,7 @@ header {
   );
 }
 
-/* затемнение */
+/* затемнение поверх картинки */
 header::after {
   content: "";
   position: absolute;
@@ -107,7 +96,7 @@ h1 {
   z-index: 1;
 }
 
-/* CONTAINER */
+/* CONTAINER (лёгкий светлый остров) */
 .container {
   max-width: 1200px;
   margin: auto;
@@ -154,8 +143,6 @@ footer {
 
 <body>
 
-<div class="page">
-
 <header>
 
 <h1>Heartshire</h1>
@@ -198,8 +185,6 @@ garden seasons, stubborn engineering and small domestic victories.
 <footer>
 Built with tea, mud, persistence and questionable optimism.
 </footer>
-
-</div>
 
 </body>
 </html>

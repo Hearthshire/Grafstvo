@@ -10,12 +10,13 @@
 
 body {
     margin: 0;
+    font-family: Georgia, serif;
     overflow: hidden;
     background: #2f2426;
-    font-family: Georgia, serif;
 }
 
 header {
+    position: relative;
     width: 100vw;
     height: 100vh;
 
@@ -31,12 +32,100 @@ header {
     background-repeat: no-repeat;
 }
 
+/* Контейнер кликабельных зон */
+
+.hotspots {
+    position: absolute;
+    inset: 0;
+}
+
+/* Общий стиль */
+
+.hotspot {
+    position: absolute;
+    cursor: pointer;
+
+    border-radius: 20px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+
+    background: rgba(255,255,255,0.02);
+}
+
+/* Эффект при наведении */
+
+.hotspot:hover {
+    transform: scale(1.03);
+
+    box-shadow:
+        0 0 25px rgba(255,220,200,0.25);
+
+    background: rgba(255,255,255,0.04);
+}
+
+/* THE ESTATE */
+
+.estate {
+    left: 14%;
+    bottom: 11%;
+
+    width: 16%;
+    height: 17%;
+}
+
+/* WATERWORKS */
+
+.waterworks {
+    left: 33%;
+    bottom: 11%;
+
+    width: 16%;
+    height: 17%;
+}
+
+/* GARDEN */
+
+.garden {
+    left: 52%;
+    bottom: 11%;
+
+    width: 16%;
+    height: 17%;
+}
+
+/* CHRONICLE */
+
+.chronicle {
+    left: 71%;
+    bottom: 11%;
+
+    width: 16%;
+    height: 17%;
+}
+
 </style>
 </head>
 
 <body>
 
-<header></header>
+<header>
+
+<div class="hotspots">
+
+<a href="#" class="hotspot estate"></a>
+
+<a href="#" class="hotspot waterworks"></a>
+
+<a href="#" class="hotspot garden"></a>
+
+<a href="#" class="hotspot chronicle"></a>
+
+</div>
+
+</header>
 
 </body>
 </html>

@@ -45,8 +45,8 @@ header {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 120%;
+  width: 110%;
+  height: 110%;
 
   background-image:
     linear-gradient(
@@ -59,32 +59,31 @@ header {
   background-position: center;
   background-repeat: no-repeat;
 
-  transform: translateY(0px);
-
   z-index: 0;
+
+  transform: translate3d(0,0,0);
+  transition: transform 0.1s linear;
 }
 
-/* 🏡 “ЖИВОЙ ДОМ” — отдельный слой */
+/* 🏡 “дом” — более чувствительный слой */
 .living-house {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 120%;
+  width: 110%;
+  height: 110%;
 
-  background-image: url('./hearthshire-sun.png'); 
-  /* если есть отдельная версия дома — можно заменить */
-
+  background-image: url('./hearthshire-sun.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  opacity: 0.0; 
-  /* 👆 сейчас невидим как слой, но участвует в движении */
-
   z-index: 1;
 
-  transform: translateY(0px) scale(1);
+  opacity: 0.0; /* пока демонстрационный слой */
+
+  transform: translate3d(0,0,0);
+  transition: transform 0.05s linear;
 }
 
 /* текст */
@@ -206,18 +205,33 @@ Built with tea, mud, persistence and questionable optimism.
 const bg = document.querySelector('.parallax-bg');
 const house = document.querySelector('.living-house');
 
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
+let mouseX = 0;
+let mouseY = 0;
 
-  // 🌅 фон — медленный параллакс
-  bg.style.transform = `translateY(${y * 0.25}px)`;
+window.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5);
+  const y = (e.clientY / window.innerHeight - 0.5);
 
-  // 🏡 “живой дом” — ещё более мягкая реакция
+  mouseX = x;
+  mouseY = y;
+});
+
+function animate() {
+  // 🌅 фон — медленное движение
+  bg.style.transform = `
+    translate(${mouseX * 20}px, ${mouseY * 15}px)
+  `;
+
+  // 🏡 “дом” — более живой слой
   house.style.transform = `
-    translateY(${y * 0.15}px)
+    translate(${mouseX * 40}px, ${mouseY * 30}px)
     scale(1.02)
   `;
-});
+
+  requestAnimationFrame(animate);
+}
+
+animate();
 </script>
 
 </body>

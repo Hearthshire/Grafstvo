@@ -22,7 +22,7 @@ body {
   overflow-x: hidden;
 }
 
-/* HEADER */
+/* СЦЕНА */
 header {
   min-height: 100vh;
   position: relative;
@@ -40,13 +40,10 @@ header {
   overflow: hidden;
 }
 
-/* 🌅 ФОН */
-.parallax-bg {
+/* 🌅 ДАЛЬНИЙ ФОН */
+.bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 110%;
-  height: 110%;
+  inset: 0;
 
   background-image:
     linear-gradient(
@@ -62,37 +59,68 @@ header {
   z-index: 0;
 
   transform: translate3d(0,0,0);
-  transition: transform 0.1s linear;
 }
 
-/* 🏡 “дом” — более чувствительный слой */
-.living-house {
+/* 🌫 ТУМАН */
+.fog {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 110%;
-  height: 110%;
+  inset: 0;
 
-  background-image: url('./hearthshire-sun.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 230, 220, 0.12),
+    rgba(0,0,0,0.60)
+  );
 
   z-index: 1;
-
-  opacity: 0.0; /* пока демонстрационный слой */
-
-  transform: translate3d(0,0,0);
-  transition: transform 0.05s linear;
+  pointer-events: none;
 }
 
-/* текст */
+/* 🏡 ДОМ — ГЛАВНЫЙ ОБЪЕКТ */
+.house {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+
+  width: min(800px, 90vw);
+  height: 85vh;
+
+  background-image: url('./house.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+
+  transform: translate(-50%, 0);
+
+  z-index: 3;
+
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+
+  will-change: transform;
+}
+
+/* ✨ лёгкая виньетка */
+.vignette {
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    circle at center,
+    transparent 35%,
+    rgba(0,0,0,0.55)
+  );
+
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ТЕКСТ */
 h1 {
   font-size: clamp(2.5rem, 6vw, 5rem);
   color: #fff3ea;
   margin: 0;
   position: relative;
-  z-index: 2;
+  z-index: 5;
 }
 
 .subtitle {
@@ -100,29 +128,27 @@ h1 {
   max-width: 700px;
 
   color: #f3dfd7;
-  opacity: 0.9;
+  opacity: 0.95;
 
   margin-top: 10px;
 
   position: relative;
-  z-index: 2;
+  z-index: 5;
 }
 
-/* CONTAINER */
+/* СЕКЦИЯ */
 .container {
   max-width: 1200px;
   margin: auto;
   padding: 60px 20px;
 }
 
-/* GRID */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 25px;
 }
 
-/* CARDS */
 .card {
   background: rgba(244, 210, 202, 0.6);
 
@@ -143,7 +169,6 @@ h1 {
   color: #fff1ea;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
   padding: 40px;
@@ -157,8 +182,10 @@ footer {
 
 <header>
 
-<div class="parallax-bg"></div>
-<div class="living-house"></div>
+<div class="bg"></div>
+<div class="fog"></div>
+<div class="house"></div>
+<div class="vignette"></div>
 
 <h1>Heartshire</h1>
 
@@ -202,30 +229,29 @@ Built with tea, mud, persistence and questionable optimism.
 </footer>
 
 <script>
-const bg = document.querySelector('.parallax-bg');
-const house = document.querySelector('.living-house');
+const bg = document.querySelector('.bg');
+const house = document.querySelector('.house');
 
-let mouseX = 0;
-let mouseY = 0;
+let mx = 0;
+let my = 0;
 
 window.addEventListener('mousemove', (e) => {
-  const x = (e.clientX / window.innerWidth - 0.5);
-  const y = (e.clientY / window.innerHeight - 0.5);
-
-  mouseX = x;
-  mouseY = y;
+  mx = (e.clientX / window.innerWidth - 0.5);
+  my = (e.clientY / window.innerHeight - 0.5);
 });
 
 function animate() {
-  // 🌅 фон — медленное движение
+
+  // 🌅 фон — почти статичный
   bg.style.transform = `
-    translate(${mouseX * 20}px, ${mouseY * 15}px)
+    translate(${mx * 15}px, ${my * 10}px)
   `;
 
-  // 🏡 “дом” — более живой слой
+  // 🏡 дом — главный объект сцены
   house.style.transform = `
-    translate(${mouseX * 40}px, ${mouseY * 30}px)
-    scale(1.02)
+    translate(-50%, 0)
+    translate(${mx * 50}px, ${my * 25}px)
+    scale(1.03)
   `;
 
   requestAnimationFrame(animate);

@@ -68,7 +68,7 @@ header {
 
   background: radial-gradient(
     circle at center,
-    rgba(255, 230, 220, 0.12),
+    rgba(255, 220, 200, 0.10),
     rgba(0,0,0,0.60)
   );
 
@@ -76,30 +76,35 @@ header {
   pointer-events: none;
 }
 
-/* 🏡 ДОМ — ГЛАВНЫЙ ОБЪЕКТ */
+/* 🏡 ДОМ (ГЛАВНЫЙ ОБЪЕКТ) */
 .house {
   position: absolute;
   left: 50%;
   bottom: 0;
 
-  width: min(800px, 90vw);
-  height: 85vh;
+  width: min(700px, 80vw);
 
-  background-image: url('./house.png');
+  transform: translate(-50%, 0);
+
+  z-index: 2;
+
+  background-image: url('./house.png'); /* если нет — скажи, помогу сделать */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom;
 
-  transform: translate(-50%, 0);
-
-  z-index: 3;
-
-  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+  height: 80vh;
 
   will-change: transform;
 }
 
-/* ✨ лёгкая виньетка */
+/* fallback если нет house.png */
+.house.fallback {
+  background-image:
+    radial-gradient(circle at bottom, rgba(255,255,255,0.25), transparent 60%);
+}
+
+/* ВИНЬЕТКА */
 .vignette {
   position: absolute;
   inset: 0;
@@ -107,10 +112,10 @@ header {
   background: radial-gradient(
     circle at center,
     transparent 35%,
-    rgba(0,0,0,0.55)
+    rgba(0,0,0,0.5)
   );
 
-  z-index: 4;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -120,7 +125,7 @@ h1 {
   color: #fff3ea;
   margin: 0;
   position: relative;
-  z-index: 5;
+  z-index: 4;
 }
 
 .subtitle {
@@ -133,10 +138,10 @@ h1 {
   margin-top: 10px;
 
   position: relative;
-  z-index: 5;
+  z-index: 4;
 }
 
-/* СЕКЦИЯ */
+/* САЙТ НИЖЕ */
 .container {
   max-width: 1200px;
   margin: auto;
@@ -184,7 +189,7 @@ footer {
 
 <div class="bg"></div>
 <div class="fog"></div>
-<div class="house"></div>
+<div class="house fallback"></div>
 <div class="vignette"></div>
 
 <h1>Heartshire</h1>
@@ -242,16 +247,16 @@ window.addEventListener('mousemove', (e) => {
 
 function animate() {
 
-  // 🌅 фон — почти статичный
+  // 🌅 фон — почти стоит
   bg.style.transform = `
     translate(${mx * 15}px, ${my * 10}px)
   `;
 
-  // 🏡 дом — главный объект сцены
+  // 🏡 дом — главный герой сцены
   house.style.transform = `
     translate(-50%, 0)
-    translate(${mx * 50}px, ${my * 25}px)
-    scale(1.03)
+    translate(${mx * 35}px, ${my * 20}px)
+    scale(1.02)
   `;
 
   requestAnimationFrame(animate);

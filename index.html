@@ -19,12 +19,33 @@ body {
   );
 
   color: #f7ece7;
+
+  overflow-x: hidden;
 }
 
 /* HEADER */
 header {
   min-height: 100vh;
   position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-end;
+  align-items: center;
+
+  text-align: center;
+
+  padding: 20px 20px 80px 20px;
+
+  overflow: hidden;
+}
+
+/* 🌅 ФОН (отдельный слой для параллакса) */
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
 
   background-image:
     linear-gradient(
@@ -37,52 +58,37 @@ header {
   background-position: center;
   background-repeat: no-repeat;
 
-  display: flex;
-  flex-direction: column;
+  transform: translateY(0px);
+  will-change: transform;
 
-  justify-content: flex-end;
-  align-items: center;
-
-  text-align: center;
-
-  padding: 20px 20px 80px 20px;
-
-  mask-image: linear-gradient(
-    to bottom,
-    black 70%,
-    transparent 100%
-  );
-
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    black 70%,
-    transparent 100%
-  );
+  z-index: 0;
 }
 
-/* затемнение поверх картинки */
+/* затемнение/глубина */
 header::after {
   content: "";
   position: absolute;
   inset: 0;
+
   background: radial-gradient(
     circle at center,
     transparent 30%,
     rgba(0,0,0,0.4)
   );
+
+  z-index: 1;
   pointer-events: none;
 }
 
-/* 🔥 РЕЗИНОВЫЙ ЗАГОЛОВОК */
+/* текст поверх */
 h1 {
   font-size: clamp(2.5rem, 6vw, 5rem);
   color: #fff3ea;
   margin: 0;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-/* 🔥 РЕЗИНОВОЕ ОПИСАНИЕ */
 .subtitle {
   font-size: clamp(1rem, 2.2vw, 1.3rem);
   max-width: 700px;
@@ -93,7 +99,7 @@ h1 {
   margin-top: 10px;
 
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* CONTAINER */
@@ -185,6 +191,12 @@ garden seasons, stubborn engineering and small domestic victories.
 <footer>
 Built with tea, mud, persistence and questionable optimism.
 </footer>
+
+<script>
+window.addEventListener("scroll", () => {
+  const header = document.querySelector("header::before");
+});
+</script>
 
 </body>
 </html>

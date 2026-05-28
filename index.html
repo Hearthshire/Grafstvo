@@ -34,7 +34,7 @@ header {
   overflow: hidden;
 }
 
-/* 🌄 ФОН-БАЗА (чтобы не было пустоты) */
+/* 🌄 ФОН-БАЗА */
 .bg-base {
   position: absolute;
   inset: 0;
@@ -42,7 +42,7 @@ header {
   z-index: 0;
 }
 
-/* 🌅 КАРТИНКА — БЕЗ ОБРЕЗКИ */
+/* 🌅 КАРТИНКА БЕЗ ОБРЕЗКИ */
 .parallax-bg {
   position: absolute;
 
@@ -58,36 +58,14 @@ header {
     linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)),
     url('./hearthshire-sun.png');
 
-  background-size: contain;      /* 👈 ВАЖНО: ничего не режем */
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 
   z-index: 1;
 }
 
-/* 🏡 ДОМ (отдельный слой) */
-.living-house {
-  position: absolute;
-
-  bottom: 0;
-  left: 50%;
-
-  width: min(850px, 90vw);
-  height: 85vh;
-
-  transform: translateX(-50%);
-
-  background-image: url('./house.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom;
-
-  z-index: 3;
-
-  filter: drop-shadow(0 25px 50px rgba(0,0,0,0.5));
-}
-
-/* 🌫 мягкая атмосфера */
+/* 🌫 атмосфера */
 .fog {
   position: absolute;
   inset: 0;
@@ -110,7 +88,7 @@ h1 {
   color: #fff3ea;
 
   position: relative;
-  z-index: 4;
+  z-index: 3;
 }
 
 .subtitle {
@@ -123,7 +101,7 @@ h1 {
   margin-top: 10px;
 
   position: relative;
-  z-index: 4;
+  z-index: 3;
 }
 
 /* СЕКЦИЯ */
@@ -173,7 +151,6 @@ footer {
 <div class="bg-base"></div>
 <div class="parallax-bg"></div>
 <div class="fog"></div>
-<div class="living-house"></div>
 
 <h1>Heartshire</h1>
 
@@ -203,7 +180,6 @@ Built with tea, mud, persistence and questionable optimism.
 
 <script>
 const bg = document.querySelector('.parallax-bg');
-const house = document.querySelector('.living-house');
 
 let mx = 0;
 let my = 0;
@@ -214,18 +190,9 @@ window.addEventListener('mousemove', (e) => {
 });
 
 function animate() {
-
-  // 🌄 фон двигается очень мягко
   bg.style.transform = `
     translate(-50%, -50%)
     translate(${mx * 10}px, ${my * 6}px)
-  `;
-
-  // 🏡 дом — главный объект сцены
-  house.style.transform = `
-    translateX(-50%)
-    translate(${mx * 35}px, ${my * 20}px)
-    scale(1.02)
   `;
 
   requestAnimationFrame(animate);

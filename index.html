@@ -10,86 +10,25 @@
 
 body {
     margin: 0;
-    font-family: Georgia, serif;
+    overflow: hidden;
     background: #2f2426;
-    color: #f8efe7;
+    font-family: Georgia, serif;
 }
 
 header {
+    width: 100vw;
     height: 100vh;
 
     background-image:
         linear-gradient(
-            rgba(0,0,0,0.15),
-            rgba(0,0,0,0.35)
+            rgba(0,0,0,0.12),
+            rgba(0,0,0,0.28)
         ),
         url('hearthshire-sunset.png');
 
     background-size: cover;
     background-position: center;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.section {
-    padding: 80px 40px;
-    background: #3a2b2f;
-}
-
-.cards {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.card {
-    background: rgba(103, 74, 70, 0.88);
-
-    padding: 28px;
-    border-radius: 22px;
-    width: 230px;
-
-    backdrop-filter: blur(4px);
-
-    box-shadow:
-        0 8px 24px rgba(0,0,0,0.25);
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-
-    box-shadow:
-        0 14px 30px rgba(0,0,0,0.35);
-}
-
-.card h3 {
-    margin-top: 0;
-    font-size: 1.8rem;
-    color: #ffd8c2;
-}
-
-.card p {
-    color: #f3dfd7;
-    font-size: 1.05rem;
-    line-height: 1.7;
-}
-
-footer {
-    text-align: center;
-    padding: 40px;
-    color: #d7b8b3;
-    font-size: 0.95rem;
-    background: #2f2426;
+    background-repeat: no-repeat;
 }
 
 </style>
@@ -97,48 +36,7 @@ footer {
 
 <body>
 
-<header>
-</header>
-
-<section class="section">
-
-<div class="cards">
-
-<div class="card">
-<h3>🏡 The Estate</h3>
-<p>
-House systems, seasonal maintenance and engineering lore.
-</p>
-</div>
-
-<div class="card">
-<h3>💧 Waterworks</h3>
-<p>
-Water treatment cycles, filters and septic chronicles.
-</p>
-</div>
-
-<div class="card">
-<h3>🌿 Garden</h3>
-<p>
-Plants, lawns, strawberries and quiet evenings outdoors.
-</p>
-</div>
-
-<div class="card">
-<h3>📜 Chronicle</h3>
-<p>
-Guests, storms, sunsets, memories and life in Hearthshire.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<footer>
-Hearthshire • Established 2026
-</footer>
+<header></header>
 
 </body>
 </html>

@@ -8,17 +8,29 @@
 
 <style>
 
+/* =========================
+   RESET
+========================= */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* =========================
+   BODY
+========================= */
+
 body {
   font-family: Georgia, serif;
 
   background:
-    linear-gradient(to bottom, #3a2b2d, #2f2426);
+    linear-gradient(
+      to bottom,
+      #3a2b2d,
+      #2f2426
+    );
 
   color: #f7ece7;
 
@@ -26,7 +38,7 @@ body {
 }
 
 /* =========================
-   HERO SCENE
+   HERO
 ========================= */
 
 header {
@@ -50,7 +62,9 @@ header {
   padding-bottom: 70px;
 }
 
-/* ОБЩИЕ НАСТРОЙКИ СЛОЁВ */
+/* =========================
+   LAYERS
+========================= */
 
 .layer {
   position: absolute;
@@ -61,8 +75,11 @@ header {
   height: 100%;
 
   background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: cover;
+
+  /* 👇 ВАЖНО */
+  background-size: contain;
+
+  background-position: center center;
 
   will-change: transform;
 }
@@ -73,8 +90,6 @@ header {
   background-image: url('./background.png');
 
   z-index: 1;
-
-  transform: scale(1.05);
 }
 
 /* 🌲 AROUND */
@@ -83,8 +98,6 @@ header {
   background-image: url('./around.png');
 
   z-index: 2;
-
-  transform: scale(1.03);
 }
 
 /* 🏡 HOME */
@@ -93,10 +106,6 @@ header {
   background-image: url('./myhome.png');
 
   z-index: 3;
-
-  background-size: contain;
-
-  transform-origin: center bottom;
 }
 
 /* 🌿 FOREGROUND */
@@ -105,10 +114,6 @@ header {
   background-image: url('./foreground.png');
 
   z-index: 4;
-
-  background-position: center bottom;
-
-  transform: scale(1.02);
 }
 
 /* 🌫 ATMOSPHERE */
@@ -242,7 +247,9 @@ h1 {
   line-height: 1.6;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 footer {
   text-align: center;
@@ -264,8 +271,8 @@ footer {
     padding-bottom: 50px;
   }
 
-  .home {
-    background-size: 120%;
+  h1 {
+    font-size: 3rem;
   }
 
   .subtitle {
@@ -288,16 +295,16 @@ footer {
   <!-- 🌅 SKY -->
   <div class="layer background"></div>
 
-  <!-- 🌲 TREES / AROUND -->
+  <!-- 🌲 AROUND -->
   <div class="layer around"></div>
 
   <!-- 🏡 HOUSE -->
   <div class="layer home"></div>
 
-  <!-- 🌿 FRONT -->
+  <!-- 🌿 FOREGROUND -->
   <div class="layer foreground"></div>
 
-  <!-- 🌫 LIGHT -->
+  <!-- 🌫 ATMOSPHERE -->
   <div class="atmosphere"></div>
 
   <!-- TEXT -->
@@ -320,6 +327,7 @@ footer {
 
     <div class="card">
       <h2>🏡 The Estate</h2>
+
       <p>
         House systems, seasonal maintenance and engineering lore.
       </p>
@@ -327,6 +335,7 @@ footer {
 
     <div class="card">
       <h2>💧 Waterworks</h2>
+
       <p>
         Water treatment cycles, filters and septic chronicles.
       </p>
@@ -334,6 +343,7 @@ footer {
 
     <div class="card">
       <h2>🌿 Garden</h2>
+
       <p>
         Plants, lawns, strawberries and quiet evenings outdoors.
       </p>
@@ -341,6 +351,7 @@ footer {
 
     <div class="card">
       <h2>📜 Chronicle</h2>
+
       <p>
         Guests, storms, sunsets and life in Heartshire.
       </p>
@@ -385,38 +396,36 @@ window.addEventListener('mousemove', (e) => {
 
 });
 
+/* 🎬 АНИМАЦИЯ */
+
 function animateScene() {
 
   background.style.transform = `
     translate(
-      ${mouseX * 10}px,
-      ${mouseY * 6}px
+      ${mouseX * 6}px,
+      ${mouseY * 4}px
     )
-    scale(1.05)
   `;
 
   around.style.transform = `
     translate(
-      ${mouseX * 18}px,
-      ${mouseY * 10}px
+      ${mouseX * 12}px,
+      ${mouseY * 8}px
     )
-    scale(1.03)
   `;
 
   home.style.transform = `
     translate(
-      ${mouseX * 28}px,
-      ${mouseY * 14}px
+      ${mouseX * 18}px,
+      ${mouseY * 10}px
     )
-    scale(1.02)
   `;
 
   foreground.style.transform = `
     translate(
-      ${mouseX * 40}px,
-      ${mouseY * 20}px
+      ${mouseX * 28}px,
+      ${mouseY * 14}px
     )
-    scale(1.04)
   `;
 
   requestAnimationFrame(animateScene);
@@ -425,7 +434,7 @@ function animateScene() {
 animateScene();
 
 /* =========================
-   CARD APPEAR
+   CARDS APPEAR
 ========================= */
 
 const cards =

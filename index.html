@@ -23,7 +23,7 @@ body {
 
 /* HEADER */
 header {
-  height: 100vh;
+  min-height: 100vh; /* 🔥 вместо height */
   position: relative;
 
   background-image:
@@ -35,6 +35,7 @@ header {
 
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 
   display: flex;
   flex-direction: column;
@@ -46,7 +47,6 @@ header {
 
   padding: 20px 20px 80px 20px;
 
-  /* 🌅 мягкое растворение вниз */
   mask-image: linear-gradient(
     to bottom,
     black 70%,
@@ -60,7 +60,7 @@ header {
   );
 }
 
-/* затемнение поверх картинки */
+/* затемнение */
 header::after {
   content: "";
   position: absolute;
@@ -96,7 +96,7 @@ h1 {
   z-index: 1;
 }
 
-/* CONTAINER (лёгкий светлый остров) */
+/* CONTAINER */
 .container {
   max-width: 1200px;
   margin: auto;
@@ -136,6 +136,37 @@ footer {
   text-align: center;
   padding: 40px;
   color: #e7c9c2;
+}
+
+/* 📱 АДАПТИВНОСТЬ */
+@media (max-width: 1200px) {
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  .subtitle {
+    max-width: 90%;
+  }
+
+  .container {
+    padding: 40px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 2.8rem;
+  }
+
+  header {
+    padding: 20px 15px 60px 15px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 </style>

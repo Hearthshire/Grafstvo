@@ -12,24 +12,18 @@ body {
   margin: 0;
   font-family: Georgia, serif;
 
-  background: linear-gradient(
-    to bottom,
-    #3a2b2d,
-    #2f2426
-  );
-
+  background: linear-gradient(to bottom, #3a2b2d, #2f2426);
   color: #f7ece7;
   overflow-x: hidden;
 }
 
-/* HEADER */
+/* СЦЕНА */
 header {
   min-height: 100vh;
   position: relative;
 
   display: flex;
   flex-direction: column;
-
   justify-content: flex-end;
   align-items: center;
 
@@ -40,60 +34,83 @@ header {
   overflow: hidden;
 }
 
-/* 🌅 ФОН */
-.parallax-bg {
+/* 🌄 ФОН-БАЗА (чтобы не было пустоты) */
+.bg-base {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 120%;
-
-  background-image:
-    linear-gradient(
-      rgba(0,0,0,0.35),
-      rgba(0,0,0,0.45)
-    ),
-    url('./hearthshire-sun.png');
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  transform: translateY(0px);
-
+  inset: 0;
+  background: #2f2426;
   z-index: 0;
 }
 
-/* 🏡 “ЖИВОЙ ДОМ” — отдельный слой */
-.living-house {
+/* 🌅 КАРТИНКА — БЕЗ ОБРЕЗКИ */
+.parallax-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 120%;
 
-  background-image: url('./hearthshire-sun.png'); 
-  /* если есть отдельная версия дома — можно заменить */
+  top: 50%;
+  left: 50%;
 
-  background-size: cover;
-  background-position: center;
+  transform: translate(-50%, -50%);
+
+  width: 100vw;
+  height: 100vh;
+
+  background-image:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)),
+    url('./hearthshire-sun.png');
+
+  background-size: contain;      /* 👈 ВАЖНО: ничего не режем */
   background-repeat: no-repeat;
-
-  opacity: 0.0; 
-  /* 👆 сейчас невидим как слой, но участвует в движении */
+  background-position: center;
 
   z-index: 1;
-
-  transform: translateY(0px) scale(1);
 }
 
-/* текст */
+/* 🏡 ДОМ (отдельный слой) */
+.living-house {
+  position: absolute;
+
+  bottom: 0;
+  left: 50%;
+
+  width: min(850px, 90vw);
+  height: 85vh;
+
+  transform: translateX(-50%);
+
+  background-image: url('./house.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+
+  z-index: 3;
+
+  filter: drop-shadow(0 25px 50px rgba(0,0,0,0.5));
+}
+
+/* 🌫 мягкая атмосфера */
+.fog {
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 220, 200, 0.10),
+    rgba(0,0,0,0.55)
+  );
+
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ТЕКСТ */
 h1 {
   font-size: clamp(2.5rem, 6vw, 5rem);
-  color: #fff3ea;
   margin: 0;
+
+  color: #fff3ea;
+
   position: relative;
-  z-index: 2;
+  z-index: 4;
 }
 
 .subtitle {
@@ -101,37 +118,33 @@ h1 {
   max-width: 700px;
 
   color: #f3dfd7;
-  opacity: 0.9;
+  opacity: 0.95;
 
   margin-top: 10px;
 
   position: relative;
-  z-index: 2;
+  z-index: 4;
 }
 
-/* CONTAINER */
+/* СЕКЦИЯ */
 .container {
   max-width: 1200px;
   margin: auto;
   padding: 60px 20px;
 }
 
-/* GRID */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 25px;
 }
 
-/* CARDS */
 .card {
   background: rgba(244, 210, 202, 0.6);
-
   padding: 28px;
   border-radius: 22px;
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-
   transition: 0.3s ease;
 }
 
@@ -144,7 +157,6 @@ h1 {
   color: #fff1ea;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
   padding: 40px;
@@ -158,7 +170,9 @@ footer {
 
 <header>
 
+<div class="bg-base"></div>
 <div class="parallax-bg"></div>
+<div class="fog"></div>
 <div class="living-house"></div>
 
 <h1>Heartshire</h1>
@@ -174,25 +188,10 @@ garden seasons, stubborn engineering and small domestic victories.
 
 <div class="cards">
 
-<div class="card">
-<h2>🏡 The Estate</h2>
-<p>House systems, seasonal maintenance and engineering lore.</p>
-</div>
-
-<div class="card">
-<h2>💧 Waterworks</h2>
-<p>Water treatment cycles, filters and septic chronicles.</p>
-</div>
-
-<div class="card">
-<h2>🌿 Garden</h2>
-<p>Plants, lawns, strawberries and quiet evenings outdoors.</p>
-</div>
-
-<div class="card">
-<h2>📜 Chronicle</h2>
-<p>Guests, storms, sunsets and life in Heartshire.</p>
-</div>
+<div class="card"><h2>🏡 The Estate</h2><p>House systems.</p></div>
+<div class="card"><h2>💧 Waterworks</h2><p>Water cycles.</p></div>
+<div class="card"><h2>🌿 Garden</h2><p>Seasons and plants.</p></div>
+<div class="card"><h2>📜 Chronicle</h2><p>Life in Heartshire.</p></div>
 
 </div>
 
@@ -206,18 +205,33 @@ Built with tea, mud, persistence and questionable optimism.
 const bg = document.querySelector('.parallax-bg');
 const house = document.querySelector('.living-house');
 
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
+let mx = 0;
+let my = 0;
 
-  // 🌅 фон — медленный параллакс
-  bg.style.transform = `translateY(${y * 0.25}px)`;
+window.addEventListener('mousemove', (e) => {
+  mx = (e.clientX / window.innerWidth - 0.5);
+  my = (e.clientY / window.innerHeight - 0.5);
+});
 
-  // 🏡 “живой дом” — ещё более мягкая реакция
+function animate() {
+
+  // 🌄 фон двигается очень мягко
+  bg.style.transform = `
+    translate(-50%, -50%)
+    translate(${mx * 10}px, ${my * 6}px)
+  `;
+
+  // 🏡 дом — главный объект сцены
   house.style.transform = `
-    translateY(${y * 0.15}px)
+    translateX(-50%)
+    translate(${mx * 35}px, ${my * 20}px)
     scale(1.02)
   `;
-});
+
+  requestAnimationFrame(animate);
+}
+
+animate();
 </script>
 
 </body>

@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -14,76 +15,87 @@
 
 body {
   margin: 0;
+  overflow-x: hidden;
+
   font-family: Georgia, serif;
 
-  background: linear-gradient(
-    to bottom,
-    #3a2b2d,
-    #2f2426
-  );
+  background:
+    linear-gradient(
+      to bottom,
+      #3a2b2d,
+      #2f2426
+    );
 
   color: #f7ece7;
-  overflow-x: hidden;
 }
 
 /* =========================
-   🌙 HEADER
+   🌙 HERO
 ========================= */
 
-header {
+.hero {
   position: relative;
-  min-height: 100vh;
+
+  height: 100vh;
+  min-height: 700px;
 
   overflow: hidden;
 
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 
-  justify-content: flex-end;
-  align-items: center;
-
-  text-align: center;
-
-  padding: 40px 20px 80px;
+  padding-bottom: 90px;
 }
 
 /* =========================
    🌅 BACKGROUND
 ========================= */
 
-.parallax-bg {
+.background-layer {
   position: absolute;
   inset: 0;
 
-  background-image: url('./background_1920x1080.png');
-  background-size: contain;
-  background-position: center bottom;
+  background-image:
+    url('./background_1920x1080.png');
+
+  background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
 
-  z-index: 0;
+  z-index: 1;
 
-  transform: translateY(0px);
+  transform: translateY(0px) scale(1.02);
 }
 
 /* =========================
    🏡 HOUSE
 ========================= */
 
-.house-layer {
+.house-wrapper {
   position: absolute;
 
-  inset: 0;
+  bottom: 0;
+  left: 50%;
 
-  background-image: url('./home_1920x1080.png');
-  background-size: contain;
-  background-position: center bottom;
-  background-repeat: no-repeat;
+  width: min(900px, 80vw);
 
-  z-index: 2;
+  transform:
+    translateX(-50%);
 
-  transform: translateY(0px) scale(1);
+  z-index: 3;
 
   pointer-events: none;
+}
+
+.house-img {
+  width: 100%;
+  height: auto;
+
+  display: block;
+
+  filter:
+    drop-shadow(0 30px 40px rgba(0,0,0,0.35));
 }
 
 /* =========================
@@ -93,25 +105,29 @@ header {
 .foreground-layer {
   position: absolute;
 
-  inset: 0;
+  left: 0;
+  bottom: 0;
 
-  background-image: url('./foreground_1920x1080.png');
-  background-size: contain;
+  width: 100%;
+  height: 45vh;
+
+  background-image:
+    url('./foreground_1920x1080.png');
+
+  background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
 
-  z-index: 3;
-
-  transform: translateY(0px);
+  z-index: 4;
 
   pointer-events: none;
 }
 
 /* =========================
-   🌫 OVERLAY
+   🌫 ATMOSPHERE
 ========================= */
 
-header::after {
+.hero::after {
   content: "";
 
   position: absolute;
@@ -120,67 +136,72 @@ header::after {
   background:
     linear-gradient(
       to bottom,
-      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.12),
       rgba(0,0,0,0.45)
     );
 
-  z-index: 4;
+  z-index: 5;
 
   pointer-events: none;
 }
 
 /* =========================
-   ✨ TEXT
+   ✨ CONTENT
 ========================= */
 
 .hero-content {
   position: relative;
-  z-index: 5;
+  z-index: 10;
 
-  margin-bottom: 30px;
+  text-align: center;
+
+  max-width: 850px;
+
+  padding: 0 20px;
 }
 
 h1 {
   margin: 0;
 
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size:
+    clamp(3rem, 8vw, 6rem);
 
   color: #fff3ea;
 
   text-shadow:
-    0 4px 12px rgba(0,0,0,0.45);
+    0 6px 20px rgba(0,0,0,0.45);
 }
 
 .subtitle {
-  margin-top: 14px;
+  margin-top: 18px;
 
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-size:
+    clamp(1rem, 2vw, 1.35rem);
 
-  max-width: 720px;
-
-  line-height: 1.6;
+  line-height: 1.7;
 
   color: #f3dfd7;
 
   opacity: 0.95;
 
   text-shadow:
-    0 2px 8px rgba(0,0,0,0.4);
+    0 2px 8px rgba(0,0,0,0.45);
 }
 
 /* =========================
-   📦 CONTENT
+   📦 CONTENT SECTION
 ========================= */
 
 .container {
   position: relative;
-  z-index: 10;
+  z-index: 20;
 
   max-width: 1200px;
 
   margin: auto;
 
-  padding: 80px 20px;
+  padding:
+    90px 20px;
 }
 
 /* =========================
@@ -191,47 +212,50 @@ h1 {
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fit, minmax(250px, 1fr));
+    repeat(auto-fit, minmax(260px, 1fr));
 
-  gap: 25px;
+  gap: 28px;
 }
 
 .card {
-  background: rgba(244, 210, 202, 0.60);
+  background:
+    rgba(244, 210, 202, 0.60);
 
-  backdrop-filter: blur(6px);
-
-  padding: 28px;
+  backdrop-filter:
+    blur(6px);
 
   border-radius: 24px;
+
+  padding: 30px;
 
   box-shadow:
     0 10px 30px rgba(0,0,0,0.18);
 
   transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease,
-    opacity 0.8s ease;
+    transform 0.8s ease,
+    opacity 0.8s ease,
+    box-shadow 0.35s ease;
+
+  opacity: 0;
 
   transform:
     translateY(60px);
-
-  opacity: 0;
 }
 
-/* ✨ выезд карточек */
 .card.show {
-  transform: translateY(0);
   opacity: 1;
+
+  transform:
+    translateY(0);
 }
 
 .card:hover {
   transform:
-    translateY(-6px)
+    translateY(-8px)
     scale(1.02);
 
   box-shadow:
-    0 18px 40px rgba(0,0,0,0.22);
+    0 18px 45px rgba(0,0,0,0.24);
 }
 
 .card h2 {
@@ -247,7 +271,8 @@ h1 {
 footer {
   text-align: center;
 
-  padding: 50px 20px;
+  padding:
+    50px 20px;
 
   color: #e7c9c2;
 
@@ -258,19 +283,18 @@ footer {
    📱 MOBILE
 ========================= */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
-  header {
-    min-height: 85vh;
-    padding-bottom: 60px;
+  .hero {
+    min-height: 100svh;
   }
 
-  .subtitle {
-    padding: 0 10px;
+  .house-wrapper {
+    width: 95vw;
   }
 
-  .cards {
-    grid-template-columns: 1fr;
+  .foreground-layer {
+    height: 30vh;
   }
 
 }
@@ -280,18 +304,26 @@ footer {
 
 <body>
 
-<header>
+<!-- 🌙 HERO -->
 
-  <!-- 🌅 background -->
-  <div class="parallax-bg"></div>
+<section class="hero">
 
-  <!-- 🏡 house -->
-  <div class="house-layer"></div>
+  <!-- 🌅 BACKGROUND -->
+  <div class="background-layer"></div>
 
-  <!-- 🌿 foreground -->
+  <!-- 🏡 HOUSE -->
+  <div class="house-wrapper">
+    <img
+      src="./home_1920x1080.png"
+      class="house-img"
+      alt="House"
+    >
+  </div>
+
+  <!-- 🌿 FOREGROUND -->
   <div class="foreground-layer"></div>
 
-  <!-- ✨ text -->
+  <!-- ✨ TEXT -->
   <div class="hero-content">
 
     <h1>Heartshire</h1>
@@ -303,7 +335,9 @@ footer {
 
   </div>
 
-</header>
+</section>
+
+<!-- 📦 CONTENT -->
 
 <section class="container">
 
@@ -311,22 +345,30 @@ footer {
 
     <div class="card">
       <h2>🏡 The Estate</h2>
-      <p>House systems, seasonal maintenance and engineering lore.</p>
+      <p>
+        House systems, seasonal maintenance and engineering lore.
+      </p>
     </div>
 
     <div class="card">
       <h2>💧 Waterworks</h2>
-      <p>Water treatment cycles, filters and septic chronicles.</p>
+      <p>
+        Water treatment cycles, filters and septic chronicles.
+      </p>
     </div>
 
     <div class="card">
       <h2>🌿 Garden</h2>
-      <p>Plants, lawns, strawberries and quiet evenings outdoors.</p>
+      <p>
+        Plants, lawns, strawberries and quiet evenings outdoors.
+      </p>
     </div>
 
     <div class="card">
       <h2>📜 Chronicle</h2>
-      <p>Guests, storms, sunsets and life in Heartshire.</p>
+      <p>
+        Guests, storms, sunsets and life in Heartshire.
+      </p>
     </div>
 
   </div>
@@ -343,25 +385,30 @@ Built with tea, mud, persistence and questionable optimism.
    🌙 PARALLAX
 ========================= */
 
-const bg = document.querySelector('.parallax-bg');
-const house = document.querySelector('.house-layer');
-const fg = document.querySelector('.foreground-layer');
+const bg =
+  document.querySelector('.background-layer');
+
+const house =
+  document.querySelector('.house-wrapper');
+
+const fg =
+  document.querySelector('.foreground-layer');
 
 window.addEventListener('scroll', () => {
 
   const y = window.scrollY;
 
-  /* 🌅 дальний план */
+  /* 🌅 background */
   bg.style.transform =
-    `translateY(${y * 0.15}px)`;
+    `translateY(${y * 0.12}px) scale(1.02)`;
 
-  /* 🏡 дом */
+  /* 🏡 house */
   house.style.transform =
-    `translateY(${y * 0.28}px) scale(1.01)`;
+    `translateX(-50%) translateY(${y * 0.22}px)`;
 
-  /* 🌿 передний план */
+  /* 🌿 foreground */
   fg.style.transform =
-    `translateY(${y * 0.4}px)`;
+    `translateY(${y * 0.35}px)`;
 
 });
 
@@ -369,17 +416,19 @@ window.addEventListener('scroll', () => {
    ✨ CARD REVEAL
 ========================= */
 
-const cards = document.querySelectorAll('.card');
+const cards =
+  document.querySelectorAll('.card');
 
-const observer = new IntersectionObserver((entries) => {
+const observer =
+  new IntersectionObserver((entries) => {
 
-  entries.forEach(entry => {
+    entries.forEach((entry) => {
 
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
 
-  });
+    });
 
 }, {
   threshold: 0.15
@@ -393,3 +442,4 @@ cards.forEach(card => {
 
 </body>
 </html>
+```

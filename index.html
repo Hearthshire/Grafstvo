@@ -39,17 +39,28 @@ header {
   display: flex;
   flex-direction: column;
 
-  /* 🔥 ВАЖНО — текст вниз */
   justify-content: flex-end;
   align-items: center;
 
   text-align: center;
 
-  /* даём отступ снизу, чтобы текст не прилипал */
   padding: 20px 20px 80px 20px;
+
+  /* 🌅 мягкое растворение вниз */
+  mask-image: linear-gradient(
+    to bottom,
+    black 70%,
+    transparent 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 70%,
+    transparent 100%
+  );
 }
 
-/* затемнение */
+/* затемнение поверх картинки */
 header::after {
   content: "";
   position: absolute;
@@ -85,7 +96,7 @@ h1 {
   z-index: 1;
 }
 
-/* CONTAINER */
+/* CONTAINER (лёгкий светлый остров) */
 .container {
   max-width: 1200px;
   margin: auto;
@@ -101,7 +112,8 @@ h1 {
 
 /* CARDS */
 .card {
-  background: rgba(244, 210, 202, 0.55);
+  background: rgba(244, 210, 202, 0.6);
+
   padding: 28px;
   border-radius: 22px;
 

@@ -2,16 +2,17 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Hearthshire</title>
+  <title>Heartshire</title>
 
   <style>
+
     body {
       margin: 0;
       font-family: Georgia, serif;
-     background-color: #2c1e1a;
-      color: #f5f1e8;
+      background-color: #2f2426;
+      color: #f8efe7;
       line-height: 1.6;
     }
 
@@ -20,10 +21,10 @@
 
       background-image:
         linear-gradient(
-          rgba(0,0,0,0.45),
+          rgba(0,0,0,0.35),
           rgba(0,0,0,0.45)
         ),
-    url('./hearthshire-sunset.png');
+        url('./hearthshire-sunset.png');
 
       background-size: cover;
       background-position: center;
@@ -39,65 +40,105 @@
     }
 
     h1 {
-      font-size: 4rem;
+      font-size: 5rem;
       margin: 0;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      color: #fff3ea;
+
+      text-shadow:
+        0 0 10px rgba(0,0,0,0.5),
+        0 0 20px rgba(0,0,0,0.4);
     }
 
     .subtitle {
       font-size: 1.3rem;
-      max-width: 700px;
+      max-width: 750px;
       margin-top: 20px;
-      color: #e6dfd2;
+
+      color: #f3dfd7;
+
+      text-shadow:
+        0 0 8px rgba(0,0,0,0.5);
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: auto;
-      padding: 60px 20px;
+      padding: 70px 20px;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
+      gap: 25px;
     }
 
     .card {
-     background: #4a2f28;
-      padding: 25px;
-      border-radius: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: transform 0.2s ease;
+      background: rgba(103, 74, 70, 0.88);
+
+      padding: 28px;
+
+      border-radius: 22px;
+
+      backdrop-filter: blur(4px);
+
+      box-shadow:
+        0 10px 25px rgba(0,0,0,0.25);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
+
+      box-shadow:
+        0 16px 35px rgba(0,0,0,0.35);
     }
 
     .card h2 {
       margin-top: 0;
-     color: #f0c98d;
+
+      color: #ffd8c2;
+
+      font-size: 1.5rem;
+    }
+
+    .card p {
+      color: #f6e8df;
     }
 
     footer {
       text-align: center;
-      padding: 40px;
-    color: #d8bba2;
-      border-top: 1px solid rgba(255,255,255,0.1);
+
+      padding: 45px;
+
+      color: #d7beb4;
+
+      border-top:
+        1px solid rgba(255,255,255,0.08);
+
+      font-style: italic;
     }
+
   </style>
 </head>
 
 <body>
 
   <header>
-    <h1>Hearthshire</h1>
+
+    <h1>Heartshire</h1>
 
     <p class="subtitle">
       A digital hearth for the chronicles of a quiet house,
-      stubborn engineering, garden seasons and small domestic victories.
+      garden seasons, stubborn engineering and small domestic victories.
     </p>
+
   </header>
 
   <section class="container">
@@ -108,7 +149,7 @@
         <h2>🏡 The Estate</h2>
 
         <p>
-          House systems, maintenance, seasonal tasks and engineering lore.
+          House systems, seasonal maintenance and engineering lore.
         </p>
       </div>
 
@@ -124,7 +165,7 @@
         <h2>🌿 Garden</h2>
 
         <p>
-          Seasons, plants, lawn battles and quiet evenings outdoors.
+          Plants, lawns, strawberries and quiet evenings outdoors.
         </p>
       </div>
 
@@ -132,7 +173,7 @@
         <h2>📜 Chronicle</h2>
 
         <p>
-          Photos, memories, storms, guests and life in Hearthshire.
+          Guests, storms, sunsets, memories and life in Heartshire.
         </p>
       </div>
 
@@ -141,7 +182,7 @@
   </section>
 
   <footer>
-    Hearthshire • Established 2026
+    Built with tea, mud, persistence and questionable optimism.
   </footer>
 
 </body>

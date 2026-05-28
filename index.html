@@ -12,7 +12,7 @@ body {
   margin: 0;
   font-family: Georgia, serif;
 
-  /* пудровый закат */
+  /* тёплый пудровый закатный фон */
   background: linear-gradient(
     to bottom,
     #3a2b2d,
@@ -46,7 +46,7 @@ header {
   padding: 20px;
 }
 
-/* мягкое закатное затемнение */
+/* мягкое закатное “дыхание” */
 header::after {
   content: "";
   position: absolute;
@@ -78,23 +78,28 @@ h1 {
   z-index: 1;
 }
 
-/* CONTAINER */
+/* СЕКЦИЯ С КАРТОЧКАМИ — СВЕТЛЫЙ ОСТРОВ */
 .container {
   max-width: 1200px;
   margin: auto;
   padding: 60px 20px;
+
+  background: rgba(255, 236, 230, 0.08);
+  border-radius: 30px;
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
 }
 
-/* CARDS GRID */
+/* GRID */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 25px;
 }
 
-/* CARDS — ПУДРОВЫЙ СТИЛЬ */
+/* КАРТОЧКИ — ПУДРОВЫЙ ЗАКАТ */
 .card {
-  background: rgba(214, 173, 167, 0.55); /* пудровый закат */
+  background: rgba(244, 210, 202, 0.55);
   padding: 28px;
   border-radius: 22px;
 

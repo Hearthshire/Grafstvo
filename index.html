@@ -20,8 +20,8 @@ header {
 
     background-image:
         linear-gradient(
-            rgba(0,0,0,0.35),
-            rgba(0,0,0,0.45)
+            rgba(0,0,0,0.15),
+            rgba(0,0,0,0.35)
         ),
         url('hearthshire-sunset.png');
 
@@ -29,35 +29,16 @@ header {
     background-position: center;
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    text-align: center;
     padding: 20px;
     box-sizing: border-box;
 }
 
-h1 {
-    font-size: 5rem;
-    margin: 0;
-    color: #fff3ea;
-    text-shadow:
-        0 0 10px rgba(0,0,0,0.5),
-        0 0 20px rgba(0,0,0,0.4);
-}
-
-.subtitle {
-    margin-top: 20px;
-    font-size: 1.3rem;
-    max-width: 700px;
-    color: #f3dfd7;
-    line-height: 1.8;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-}
-
 .section {
     padding: 80px 40px;
+    background: #3a2b2f;
 }
 
 .cards {
@@ -72,12 +53,20 @@ h1 {
     padding: 30px;
     border-radius: 24px;
     width: 230px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    transition: transform 0.3s ease;
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.25);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-6px);
+
+    box-shadow:
+        0 14px 30px rgba(0,0,0,0.35);
 }
 
 .card h3 {
@@ -97,6 +86,7 @@ footer {
     padding: 40px;
     color: #d7b8b3;
     font-size: 0.95rem;
+    background: #2f2426;
 }
 
 </style>
@@ -105,12 +95,6 @@ footer {
 <body>
 
 <header>
-    <h1>Hearthshire</h1>
-
-    <div class="subtitle">
-        A digital hearth for the chronicles of a quiet house,
-        garden seasons and small domestic victories.
-    </div>
 </header>
 
 <section class="section">

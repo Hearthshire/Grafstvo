@@ -12,7 +12,6 @@ body {
   margin: 0;
   font-family: Georgia, serif;
 
-  /* пудровый закат */
   background: linear-gradient(
     to bottom,
     #3a2b2d,
@@ -46,7 +45,7 @@ header {
   padding: 20px;
 }
 
-/* мягкое закатное затемнение */
+/* затемнение/глубина */
 header::after {
   content: "";
   position: absolute;
@@ -59,12 +58,17 @@ header::after {
   pointer-events: none;
 }
 
+/* 🔽 ВОТ ЭТО НОВОЕ — сдвиг текста вниз */
+.hero {
+  margin-top: 120px;
+  position: relative;
+  z-index: 1;
+}
+
 h1 {
   font-size: 5rem;
   color: #fff3ea;
   margin: 0;
-  position: relative;
-  z-index: 1;
 }
 
 .subtitle {
@@ -73,9 +77,6 @@ h1 {
 
   color: #f3dfd7;
   opacity: 0.9;
-
-  position: relative;
-  z-index: 1;
 }
 
 /* CONTAINER */
@@ -94,7 +95,7 @@ h1 {
 
 /* CARDS — ПУДРОВЫЙ СТИЛЬ */
 .card {
-  background: rgba(214, 173, 167, 0.55); /* пудровый закат */
+  background: rgba(214, 173, 167, 0.55);
   padding: 28px;
   border-radius: 22px;
 
@@ -126,12 +127,16 @@ footer {
 
 <header>
 
+<div class="hero">
+
 <h1>Heartshire</h1>
 
 <p class="subtitle">
 A digital hearth for the chronicles of a quiet house,
 garden seasons, stubborn engineering and small domestic victories.
 </p>
+
+</div>
 
 </header>
 

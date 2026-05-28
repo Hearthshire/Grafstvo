@@ -19,81 +19,53 @@ body {
   );
 
   color: #f7ece7;
+}
 
-  /* центрируем страницу */
+/* HEADER — книжный разворот */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 40px;
+
+  padding: 60px 40px;
+
+  min-height: 100vh;
+
+  background: linear-gradient(
+    to bottom,
+    #3a2b2d,
+    #2f2426
+  );
+}
+
+/* КАРТИНКА */
+.hero-image {
+  flex: 1;
   display: flex;
   justify-content: center;
-}
-
-/* ОБЁРТКА САЙТА */
-.page {
-  width: 100%;
-  max-width: 1100px;
-  padding: 0 10px;
-}
-
-/* HEADER */
-header {
-  height: 100vh;
-  position: relative;
-
-  background-image:
-    linear-gradient(
-      rgba(0,0,0,0.35),
-      rgba(0,0,0,0.45)
-    ),
-    url('./hearthshire-sun.png');
-
-  background-size: cover;
-  background-position: center;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: flex-end;
   align-items: center;
+}
 
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ТЕКСТ */
+.hero-text {
+  flex: 1;
   text-align: center;
-
-  padding: 20px 20px 80px 20px;
-
-  /* мягкое растворение вниз */
-  mask-image: linear-gradient(
-    to bottom,
-    black 70%,
-    transparent 100%
-  );
-
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    black 70%,
-    transparent 100%
-  );
 }
 
-/* затемнение */
-header::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at center,
-    transparent 30%,
-    rgba(0,0,0,0.4)
-  );
-  pointer-events: none;
-}
-
-/* заголовок */
 h1 {
   font-size: 5rem;
   color: #fff3ea;
   margin: 0;
-  position: relative;
-  z-index: 1;
 }
 
-/* описание */
 .subtitle {
   font-size: 1.3rem;
   max-width: 700px;
@@ -102,9 +74,6 @@ h1 {
   opacity: 0.9;
 
   margin-top: 10px;
-
-  position: relative;
-  z-index: 1;
 }
 
 /* CONTAINER */
@@ -154,9 +123,13 @@ footer {
 
 <body>
 
-<div class="page">
-
 <header>
+
+<div class="hero-image">
+  <img src="./hearthshire-sun.png" alt="Heartshire">
+</div>
+
+<div class="hero-text">
 
 <h1>Heartshire</h1>
 
@@ -164,6 +137,8 @@ footer {
 A digital hearth for the chronicles of a quiet house,
 garden seasons, stubborn engineering and small domestic victories.
 </p>
+
+</div>
 
 </header>
 
@@ -198,8 +173,6 @@ garden seasons, stubborn engineering and small domestic victories.
 <footer>
 Built with tea, mud, persistence and questionable optimism.
 </footer>
-
-</div>
 
 </body>
 </html>

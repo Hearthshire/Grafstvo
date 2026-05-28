@@ -38,14 +38,20 @@ header {
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  /* ВАЖНО: убрали центр */
+  justify-content: flex-start;
   align-items: center;
 
   text-align: center;
-  padding: 20px;
+
+  /* вот это делает "над карточками" */
+  padding-top: 120px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-/* затемнение/глубина */
+/* затемнение слоя */
 header::after {
   content: "";
   position: absolute;
@@ -58,25 +64,27 @@ header::after {
   pointer-events: none;
 }
 
-/* 🔽 ВОТ ЭТО НОВОЕ — сдвиг текста вниз */
-.hero {
-  margin-top: 120px;
-  position: relative;
-  z-index: 1;
-}
-
+/* заголовок */
 h1 {
   font-size: 5rem;
   color: #fff3ea;
   margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
+/* описание */
 .subtitle {
   font-size: 1.3rem;
   max-width: 700px;
 
   color: #f3dfd7;
   opacity: 0.9;
+
+  margin-top: 10px;
+
+  position: relative;
+  z-index: 1;
 }
 
 /* CONTAINER */
@@ -86,16 +94,16 @@ h1 {
   padding: 60px 20px;
 }
 
-/* CARDS GRID */
+/* GRID */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 25px;
 }
 
-/* CARDS — ПУДРОВЫЙ СТИЛЬ */
+/* CARDS */
 .card {
-  background: rgba(214, 173, 167, 0.55);
+  background: rgba(244, 210, 202, 0.55);
   padding: 28px;
   border-radius: 22px;
 
@@ -127,16 +135,12 @@ footer {
 
 <header>
 
-<div class="hero">
-
 <h1>Heartshire</h1>
 
 <p class="subtitle">
 A digital hearth for the chronicles of a quiet house,
 garden seasons, stubborn engineering and small domestic victories.
 </p>
-
-</div>
 
 </header>
 

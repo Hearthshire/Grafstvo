@@ -32,78 +32,81 @@ header {
     background-repeat: no-repeat;
 }
 
-/* Контейнер кликабельных зон */
+/* Контейнер */
 
 .hotspots {
     position: absolute;
     inset: 0;
 }
 
-/* Общий стиль */
+/* Карточки */
 
 .hotspot {
     position: absolute;
     cursor: pointer;
 
-    border-radius: 20px;
+    border-radius: 22px;
+
+    background: rgba(103, 74, 70, 0.82);
+
+    backdrop-filter: blur(4px);
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.25);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease,
         background 0.25s ease;
-
-    background: rgba(255,255,255,0.02);
 }
-
-/* Эффект при наведении */
 
 .hotspot:hover {
-    transform: scale(1.03);
+    transform: translateY(-4px);
 
     box-shadow:
-        0 0 25px rgba(255,220,200,0.25);
+        0 12px 30px rgba(0,0,0,0.35);
 
-    background: rgba(255,255,255,0.04);
+    background: rgba(120, 88, 84, 0.9);
 }
 
-/* THE ESTATE */
+/* The Estate */
 
 .estate {
-    left: 14%;
-    bottom: 11%;
+    left: 13%;
+    bottom: 10%;
 
     width: 16%;
-    height: 17%;
+    height: 18%;
 }
 
-/* WATERWORKS */
+/* Waterworks */
 
 .waterworks {
-    left: 33%;
-    bottom: 11%;
+    left: 32%;
+    bottom: 10%;
 
     width: 16%;
-    height: 17%;
+    height: 18%;
 }
 
-/* GARDEN */
+/* Garden */
 
 .garden {
-    left: 52%;
-    bottom: 11%;
+    left: 51%;
+    bottom: 10%;
 
     width: 16%;
-    height: 17%;
+    height: 18%;
 }
 
-/* CHRONICLE */
+/* Chronicle */
 
 .chronicle {
-    left: 71%;
-    bottom: 11%;
+    left: 70%;
+    bottom: 10%;
 
     width: 16%;
-    height: 17%;
+    height: 18%;
 }
 
 </style>

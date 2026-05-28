@@ -8,46 +8,31 @@
 
 <style>
 
-/* =========================
-   RESET
-========================= */
-
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-/* =========================
-   BODY
-========================= */
-
 body {
+  margin: 0;
   font-family: Georgia, serif;
 
-  background:
-    linear-gradient(
-      to bottom,
-      #3a2b2d,
-      #2f2426
-    );
+  background: linear-gradient(
+    to bottom,
+    #3a2b2d,
+    #2f2426
+  );
 
   color: #f7ece7;
-
   overflow-x: hidden;
 }
 
 /* =========================
-   HERO
+   🌙 HEADER
 ========================= */
 
 header {
   position: relative;
-
-  width: 100%;
-  height: 100vh;
-
-  min-height: 700px;
+  min-height: 100vh;
 
   overflow: hidden;
 
@@ -59,124 +44,137 @@ header {
 
   text-align: center;
 
-  padding-bottom: 70px;
+  padding: 40px 20px 80px;
 }
 
 /* =========================
-   LAYERS
+   🌅 BACKGROUND
 ========================= */
 
-.layer {
+.parallax-bg {
   position: absolute;
-
   inset: 0;
 
-  width: 100%;
-  height: 100%;
-
+  background-image: url('./background_1920x1080.png');
+  background-size: contain;
+  background-position: center bottom;
   background-repeat: no-repeat;
 
-  /* 👇 ВАЖНО */
-  background-size: contain;
+  z-index: 0;
 
-  background-position: center center;
-
-  will-change: transform;
+  transform: translateY(0px);
 }
 
-/* 🌅 BACKGROUND */
+/* =========================
+   🏡 HOUSE
+========================= */
 
-.background {
-  background-image: url('./background.png');
-
-  z-index: 1;
-}
-
-/* 🌲 AROUND */
-
-.around {
-  background-image: url('./around.png');
-
-  z-index: 2;
-}
-
-/* 🏡 HOME */
-
-.home {
-  background-image: url('./myhome.png');
-
-  z-index: 3;
-}
-
-/* 🌿 FOREGROUND */
-
-.foreground {
-  background-image: url('./foreground.png');
-
-  z-index: 4;
-}
-
-/* 🌫 ATMOSPHERE */
-
-.atmosphere {
+.house-layer {
   position: absolute;
+
   inset: 0;
 
-  z-index: 5;
+  background-image: url('./home_1920x1080.png');
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
 
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(255,220,200,0.10),
-      rgba(0,0,0,0.45)
-    );
+  z-index: 2;
+
+  transform: translateY(0px) scale(1);
 
   pointer-events: none;
 }
 
 /* =========================
-   TEXT
+   🌿 FOREGROUND
+========================= */
+
+.foreground-layer {
+  position: absolute;
+
+  inset: 0;
+
+  background-image: url('./foreground_1920x1080.png');
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+
+  z-index: 3;
+
+  transform: translateY(0px);
+
+  pointer-events: none;
+}
+
+/* =========================
+   🌫 OVERLAY
+========================= */
+
+header::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.45)
+    );
+
+  z-index: 4;
+
+  pointer-events: none;
+}
+
+/* =========================
+   ✨ TEXT
 ========================= */
 
 .hero-content {
   position: relative;
+  z-index: 5;
 
-  z-index: 10;
-
-  max-width: 900px;
-
-  padding: 0 20px;
+  margin-bottom: 30px;
 }
 
 h1 {
-  font-size: clamp(3rem, 7vw, 6rem);
+  margin: 0;
+
+  font-size: clamp(3rem, 7vw, 5.5rem);
 
   color: #fff3ea;
 
   text-shadow:
-    0 4px 20px rgba(0,0,0,0.4);
+    0 4px 12px rgba(0,0,0,0.45);
 }
 
 .subtitle {
   margin-top: 14px;
 
-  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+
+  max-width: 720px;
 
   line-height: 1.6;
 
   color: #f3dfd7;
 
   opacity: 0.95;
+
+  text-shadow:
+    0 2px 8px rgba(0,0,0,0.4);
 }
 
 /* =========================
-   CONTENT
+   📦 CONTENT
 ========================= */
 
 .container {
   position: relative;
-
-  z-index: 20;
+  z-index: 10;
 
   max-width: 1200px;
 
@@ -185,7 +183,9 @@ h1 {
   padding: 80px 20px;
 }
 
-/* GRID */
+/* =========================
+   🪟 CARDS
+========================= */
 
 .cards {
   display: grid;
@@ -196,10 +196,8 @@ h1 {
   gap: 25px;
 }
 
-/* CARD */
-
 .card {
-  background: rgba(244, 210, 202, 0.58);
+  background: rgba(244, 210, 202, 0.60);
 
   backdrop-filter: blur(6px);
 
@@ -211,76 +209,68 @@ h1 {
     0 10px 30px rgba(0,0,0,0.18);
 
   transition:
-    transform 0.5s ease,
-    opacity 0.7s ease,
-    box-shadow 0.4s ease;
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.8s ease;
+
+  transform:
+    translateY(60px);
 
   opacity: 0;
-
-  transform:
-    translateY(50px);
 }
 
+/* ✨ выезд карточек */
 .card.show {
+  transform: translateY(0);
   opacity: 1;
-
-  transform:
-    translateY(0);
 }
 
 .card:hover {
   transform:
-    translateY(-8px)
+    translateY(-6px)
     scale(1.02);
 
   box-shadow:
-    0 18px 40px rgba(0,0,0,0.25);
+    0 18px 40px rgba(0,0,0,0.22);
 }
 
 .card h2 {
-  margin-bottom: 14px;
+  margin-top: 0;
 
   color: #fff1ea;
 }
 
-.card p {
-  line-height: 1.6;
-}
-
 /* =========================
-   FOOTER
+   🌙 FOOTER
 ========================= */
 
 footer {
   text-align: center;
 
-  padding: 40px;
+  padding: 50px 20px;
 
   color: #e7c9c2;
+
+  opacity: 0.8;
 }
 
 /* =========================
-   MOBILE
+   📱 MOBILE
 ========================= */
 
 @media (max-width: 768px) {
 
   header {
-    min-height: 650px;
-
-    padding-bottom: 50px;
-  }
-
-  h1 {
-    font-size: 3rem;
+    min-height: 85vh;
+    padding-bottom: 60px;
   }
 
   .subtitle {
-    line-height: 1.5;
+    padding: 0 10px;
   }
 
   .cards {
-    gap: 18px;
+    grid-template-columns: 1fr;
   }
 
 }
@@ -292,22 +282,16 @@ footer {
 
 <header>
 
-  <!-- 🌅 SKY -->
-  <div class="layer background"></div>
+  <!-- 🌅 background -->
+  <div class="parallax-bg"></div>
 
-  <!-- 🌲 AROUND -->
-  <div class="layer around"></div>
+  <!-- 🏡 house -->
+  <div class="house-layer"></div>
 
-  <!-- 🏡 HOUSE -->
-  <div class="layer home"></div>
+  <!-- 🌿 foreground -->
+  <div class="foreground-layer"></div>
 
-  <!-- 🌿 FOREGROUND -->
-  <div class="layer foreground"></div>
-
-  <!-- 🌫 ATMOSPHERE -->
-  <div class="atmosphere"></div>
-
-  <!-- TEXT -->
+  <!-- ✨ text -->
   <div class="hero-content">
 
     <h1>Heartshire</h1>
@@ -327,34 +311,22 @@ footer {
 
     <div class="card">
       <h2>🏡 The Estate</h2>
-
-      <p>
-        House systems, seasonal maintenance and engineering lore.
-      </p>
+      <p>House systems, seasonal maintenance and engineering lore.</p>
     </div>
 
     <div class="card">
       <h2>💧 Waterworks</h2>
-
-      <p>
-        Water treatment cycles, filters and septic chronicles.
-      </p>
+      <p>Water treatment cycles, filters and septic chronicles.</p>
     </div>
 
     <div class="card">
       <h2>🌿 Garden</h2>
-
-      <p>
-        Plants, lawns, strawberries and quiet evenings outdoors.
-      </p>
+      <p>Plants, lawns, strawberries and quiet evenings outdoors.</p>
     </div>
 
     <div class="card">
       <h2>📜 Chronicle</h2>
-
-      <p>
-        Guests, storms, sunsets and life in Heartshire.
-      </p>
+      <p>Guests, storms, sunsets and life in Heartshire.</p>
     </div>
 
   </div>
@@ -362,104 +334,56 @@ footer {
 </section>
 
 <footer>
-  Built with tea, mud, persistence and questionable optimism.
+Built with tea, mud, persistence and questionable optimism.
 </footer>
 
 <script>
 
 /* =========================
-   PARALLAX
+   🌙 PARALLAX
 ========================= */
 
-const background =
-  document.querySelector('.background');
+const bg = document.querySelector('.parallax-bg');
+const house = document.querySelector('.house-layer');
+const fg = document.querySelector('.foreground-layer');
 
-const around =
-  document.querySelector('.around');
+window.addEventListener('scroll', () => {
 
-const home =
-  document.querySelector('.home');
+  const y = window.scrollY;
 
-const foreground =
-  document.querySelector('.foreground');
+  /* 🌅 дальний план */
+  bg.style.transform =
+    `translateY(${y * 0.15}px)`;
 
-let mouseX = 0;
-let mouseY = 0;
+  /* 🏡 дом */
+  house.style.transform =
+    `translateY(${y * 0.28}px) scale(1.01)`;
 
-window.addEventListener('mousemove', (e) => {
-
-  mouseX =
-    (e.clientX / window.innerWidth - 0.5);
-
-  mouseY =
-    (e.clientY / window.innerHeight - 0.5);
+  /* 🌿 передний план */
+  fg.style.transform =
+    `translateY(${y * 0.4}px)`;
 
 });
 
-/* 🎬 АНИМАЦИЯ */
-
-function animateScene() {
-
-  background.style.transform = `
-    translate(
-      ${mouseX * 6}px,
-      ${mouseY * 4}px
-    )
-  `;
-
-  around.style.transform = `
-    translate(
-      ${mouseX * 12}px,
-      ${mouseY * 8}px
-    )
-  `;
-
-  home.style.transform = `
-    translate(
-      ${mouseX * 18}px,
-      ${mouseY * 10}px
-    )
-  `;
-
-  foreground.style.transform = `
-    translate(
-      ${mouseX * 28}px,
-      ${mouseY * 14}px
-    )
-  `;
-
-  requestAnimationFrame(animateScene);
-}
-
-animateScene();
-
 /* =========================
-   CARDS APPEAR
+   ✨ CARD REVEAL
 ========================= */
 
-const cards =
-  document.querySelectorAll('.card');
+const cards = document.querySelectorAll('.card');
 
-const observer =
-  new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries) => {
 
-    entries.forEach((entry, index) => {
+  entries.forEach(entry => {
 
-      if (entry.isIntersecting) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
 
-        setTimeout(() => {
-
-          entry.target.classList.add('show');
-
-        }, index * 120);
-
-      }
-
-    });
-
-  }, {
-    threshold: 0.15
   });
+
+}, {
+  threshold: 0.15
+});
 
 cards.forEach(card => {
   observer.observe(card);

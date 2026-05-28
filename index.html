@@ -19,7 +19,6 @@ body {
   );
 
   color: #f7ece7;
-
   overflow-x: hidden;
 }
 
@@ -41,11 +40,13 @@ header {
   overflow: hidden;
 }
 
-/* 🌅 ФОН (отдельный слой для параллакса) */
-header::before {
-  content: "";
+/* 🌅 ФОН (двигается через JS) */
+.parallax-bg {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%; /* чуть больше, чтобы не было пустот */
 
   background-image:
     linear-gradient(
@@ -59,12 +60,11 @@ header::before {
   background-repeat: no-repeat;
 
   transform: translateY(0px);
-  will-change: transform;
 
   z-index: 0;
 }
 
-/* затемнение/глубина */
+/* затемнение глубины */
 header::after {
   content: "";
   position: absolute;
@@ -80,7 +80,7 @@ header::after {
   pointer-events: none;
 }
 
-/* текст поверх */
+/* текст */
 h1 {
   font-size: clamp(2.5rem, 6vw, 5rem);
   color: #fff3ea;
@@ -151,6 +151,8 @@ footer {
 
 <header>
 
+<div class="parallax-bg"></div>
+
 <h1>Heartshire</h1>
 
 <p class="subtitle">
@@ -193,8 +195,13 @@ Built with tea, mud, persistence and questionable optimism.
 </footer>
 
 <script>
-window.addEventListener("scroll", () => {
-  const header = document.querySelector("header::before");
+const bg = document.querySelector('.parallax-bg');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+
+  // мягкий параллакс (очень лёгкий, не “игровой”)
+  bg.style.transform = `translateY(${scrollY * 0.3}px)`;
 });
 </script>
 

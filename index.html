@@ -43,8 +43,8 @@ body {
     width: 100%;
     height: 100vh;
     background-image: url('heartshire-home.png');
-    background-size: contain;
-    background-position: top center;
+    background-size: cover; /* Растягивает картинку на весь экран без полос по бокам */
+    background-position: top center; /* Фиксирует верхнюю часть изображения при изменении размеров */
     background-repeat: no-repeat;
 }
 
@@ -64,8 +64,8 @@ body {
 .card {
     display: block;
     width: 19vw;
-    max-width: 280px; /* Ограничили максимальную ширину оригинальным размером */
-    aspect-ratio: 280 / 270; /* Точное соотношение сторон ваших картинок */
+    max-width: 280px; 
+    aspect-ratio: 280 / 270; /* Идеальное соотношение сторон под ваши размеры */
     border-radius: 14px;
     overflow: hidden;
     cursor: pointer;
@@ -125,7 +125,6 @@ body {
     .hero {
         min-height: 100vh;
         height: auto;
-        background-size: cover;
         padding-bottom: 40px;
     }
 

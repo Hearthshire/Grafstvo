@@ -25,7 +25,7 @@ body {
     font-family: Georgia, serif;
 }
 
-/* Скрытый заголовок для поисковых роботов (SEO) и скринридеров */
+/* Скрытый заголовок для SEO */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -42,13 +42,13 @@ body {
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url('hearthshire-sun.png');
-    background-size: cover; /* Картинка на весь экран */
+    background-image: url('hearthshire-sun.png'); /* Новая фоновая картинка */
+    background-size: cover; 
     background-position: top center; 
     background-repeat: no-repeat;
 }
 
-/* КОНТЕЙНЕР КАРТОЧЕК */
+/* КОНТЕЙНЕР КАРТОЧЕК (ДЕСКТОП) */
 .cards {
     position: absolute;
     left: 50%;
@@ -71,16 +71,13 @@ body {
     cursor: pointer;
     outline: none;
     
-    /* НАЧАЛЬНАЯ ПРОЗРАЧНОСТЬ */
     opacity: 0.5;
 
-    /* ЭФФЕКТ СТЕКЛА (Остается полупрозрачным) */
     background: rgba(255, 255, 255, 0.05); 
     backdrop-filter: blur(12px);          
     -webkit-backdrop-filter: blur(12px);  
     border: 1px solid rgba(255, 255, 255, 0.1); 
     
-    /* Плавный переход для всех измененных свойств, включая opacity */
     transition:
         transform .25s ease,
         filter .25s ease,
@@ -97,7 +94,7 @@ body {
     background: transparent;
 }
 
-/* ЭФФЕКТ НАВЕДЕНИЯ (СТАНОВЯТСЯ СВЕТЛЫМИ И ЧЕТКИМИ) */
+/* ЭФФЕКТ НАВЕДЕНИЯ (Мышь) */
 @media (hover: hover) {
     .card:hover {
         transform: translateY(-8px) scale(1.02);
@@ -105,13 +102,11 @@ body {
         box-shadow:
             0 18px 40px rgba(0,0,0,0.35),
             0 0 24px rgba(255,220,190,0.18);
-            
-        /* ПОЛНАЯ НЕПРОЗРАЧНОСТЬ ПРИ НАВЕДЕНИИ КУРСОРA */
         opacity: 1;
     }
 }
 
-/* НАВИГАЦИЯ С КЛАВИАТУРЫ И АКТИВНЫЙ ФОКУС */
+/* НАВИГАЦИЯ С КЛАВИАТУРЫ */
 .card:focus-visible {
     transform: translateY(-8px);
     outline: 3px solid #ffdcbe;
@@ -125,23 +120,26 @@ body {
         width: 98vw;
         gap: 10px;
     }
-
     .card {
         width: 22vw;
     }
 }
 
-/* МОБИЛЬНАЯ ВЕРСИЯ */
+/* ОПТИМИЗИРОВАННАЯ МОБИЛЬНАЯ ВЕРСИЯ */
 @media(max-width: 800px) {
     body {
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
         height: auto;
     }
 
     .hero {
-        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Распределяет контент: арт сверху, меню снизу */
         height: auto;
-        padding-bottom: 40px;
+        min-height: 100vh;
+        background-position: center top;
     }
 
     .cards {
@@ -149,26 +147,36 @@ body {
         left: auto;
         bottom: auto;
         transform: none;
+        
         width: 100%;
-        padding: 20px;
-        margin-top: 55vh;
-        flex-wrap: wrap;
-        justify-content: center;
+        margin-top: 45vh; /* Оставляем верхнюю половину экрана под чистый арт дома */
+        padding: 24px 16px 40px 16px;
+        
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Идеальная сетка 2х2 */
+        gap: 12px;
+        
+        /* Затемняющая подложка, чтобы отделить меню от неба арта */
+        background: linear-gradient(to top, rgba(74, 47, 53, 1) 0%, rgba(74, 47, 53, 0.95) 70%, rgba(74, 47, 53, 0) 100%);
     }
 
     .card {
-        width: 42%;
+        width: 100%; /* Занимает свою ячейку в сетке */
         max-width: none;
-        /* На смартфонах увеличиваем базовую прозрачность, чтобы текст оставался читабельным без наведения мыши */
-        opacity: 0.75;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        opacity: 0.9; /* Повышаем контраст текста для экранов телефонов */
+        
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
     }
 }
 
-@media(max-width: 560px) {
-    .card {
-        width: 90%;
+/* Сверхкомпактный вид для совсем маленьких или узких экранов */
+@media(max-width: 400px) {
+    .cards {
+        margin-top: 35vh;
+        gap: 8px;
+        padding: 16px 8px 30px 8px;
     }
 }
 </style>

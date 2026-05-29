@@ -16,73 +16,101 @@
 }
 
 /* =========================
-   ФОН НА ВЕСЬ ЭКРАН
+   BODY (Умная адаптация фона)
 ========================= */
 body {
     width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: flex-start; /* Позволяет контенту скроллиться вниз, если он большой */
     
-    /* Установили chronicle-frame.png как главный и единственный фон */
-    background: 
-        linear-gradient(rgba(20, 12, 10, 0.40), rgba(20, 12, 10, 0.40)),
+    /* Базовый цвет под цвет рамки, чтобы при адаптации не было белых полей */
+    background-color: #140c0a; 
+    
+    background-image: 
+        linear-gradient(rgba(20, 12, 10, 0.20), rgba(20, 12, 10, 0.20)),
         url('chronicle-frame.png');
     
-    background-size: cover;       /* Растягивает картинку, чтобы она закрыла весь экран */
-    background-position: center top; /* Центрирует фон */
-    background-repeat: no-repeat; /* Запрещает размножение картинки */
-    background-attachment: fixed; /* Фиксирует фон при скролле (опционально, для красоты) */
+    /* ИЗМЕНЕНО: На десктопах используем cover для заполнения, центрируем по верху */
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Задник зафиксирован, контент плывет сверху */
     
     overflow-x: hidden;
     font-family: Georgia, serif;
     
-    /* Анимация плавного появления самого фона при загрузке */
-    animation: fadeInBg 1.4s ease forwards;
+    animation: fadeInBg 1.2s ease forwards;
 }
 
 /* =========================
-   КОНТЕЙНЕР ДЛЯ КОНТЕНТА
+   КОНТЕЙНЕР ДЛЯ ТЕКСТА
+   (Подстраивается под изгибы рамки)
 ========================= */
 .chronicle-wrapper {
-    width: min(90vw, 1200px);
-    min-height: 80vh;
+    width: min(85vw, 1100px);
+    min-height: 90vh;
+    margin: 40px auto;
+    
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     
-    /* Делаем область прозрачной, так как рамка теперь на фоне */
     background: transparent; 
-    padding: 60px 20px;
+    
+    /* Внутренние отступы, чтобы текст не вылезал за границы нарисованной рамки */
+    padding: 80px 60px; 
 }
 
 /* =========================
-   АНИМАЦИЯ ПОЯВЛЕНИЯ ФОНА
+   АНИМАЦИЯ
 ========================= */
 @keyframes fadeInBg {
-    from {
-        opacity: 0;
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* =========================
+   АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ
+========================= */
+@media(max-width: 1024px) {
+    body {
+        /* Переключаем на contain, чтобы на планшетах рамка вошла ПЕРЕМЕННО целиком */
+        background-size: contain;
+        background-attachment: scroll; /* На мобильных fixed-фоны часто лагают */
     }
-    to {
-        opacity: 1;
+    
+    .chronicle-wrapper {
+        width: 90vw;
+        padding: 60px 40px;
+        margin: 20px auto;
     }
 }
 
 /* =========================
-   АДАПТИВНОСТЬ ПОД ЭКРАНЫ
+   ИДЕАЛЬНАЯ МОБИЛЬНАЯ ВЕРСИЯ (Смартфоны)
 ========================= */
-@media(max-width: 1000px) {
+@media(max-width: 600px) {
+    body {
+        /* На телефонах 'contain' гарантирует, что пропорции картинки не нарушатся */
+        background-size: 100% auto; 
+        background-position: center top;
+    }
+    
     .chronicle-wrapper {
-        width: 94vw;
-        padding: 40px 15px;
+        width: 95vw;
+        /* Уменьшаем отступы, так как на смартфонах рамка становится уже */
+        padding: 45px 20px 30px 20px; 
+        margin: 10px auto;
     }
 }
 
-@media(max-width: 800px) {
+/* Для совсем маленьких экранов */
+@media(max-width: 400px) {
     .chronicle-wrapper {
-        width: 96vw;
-        padding: 24px 10px;
+        padding: 35px 15px 20px 15px;
     }
 }
 </style>

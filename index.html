@@ -6,77 +6,70 @@
 <title>Hearthshire</title>
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ОБЩИЕ СТИЛИ И СБРОС */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
+html {
+    scroll-behavior: smooth;
+}
 
-    width:100vw;
-    height:100vh;
+body {
+    width: 100%; 
+    height: 100vh;
+    overflow: hidden;
+    background: #4a2f35;
+    font-family: Georgia, serif;
+}
 
-    overflow:hidden;
-
-    background:#4a2f35;
-
-    font-family:Georgia, serif;
+/* Скрытый заголовок для поисковых роботов (SEO) и скринридеров */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 /* ОСНОВНОЙ ФОН */
-
-.hero{
-
-    position:relative;
-
-    width:100vw;
-    height:100vh;
-
-    background-image:url('heartshire-home.png');
-
-    background-size:contain;
-    background-position:top center;
-    background-repeat:no-repeat;
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('heartshire-home.png');
+    background-size: contain;
+    background-position: top center;
+    background-repeat: no-repeat;
 }
 
 /* КОНТЕЙНЕР КАРТОЧЕК */
-
-.cards{
-
-    position:absolute;
-
-    left:50%;
-    bottom:7vh;
-
-    transform:translateX(-50%);
-
-    display:flex;
-    justify-content:center;
-
-    gap:0.8vw;
-
-    width:95vw;
+.cards {
+    position: absolute;
+    left: 50%;
+    bottom: 7vh;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 0.8vw;
+    width: 95vw;
 }
 
 /* КАРТОЧКИ */
-
-.card{
-
-    display:block;
-
-    width:19vw;
-    max-width:380px;
-
-    aspect-ratio:1.35 / 1;
-
-    border-radius:14px;
-
-    overflow:hidden;
-
-    cursor:pointer;
-
+.card {
+    display: block;
+    width: 19vw;
+    max-width: 280px; /* Ограничили максимальную ширину оригинальным размером */
+    aspect-ratio: 280 / 270; /* Точное соотношение сторон ваших картинок */
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
     transition:
         transform .25s ease,
         filter .25s ease,
@@ -84,129 +77,106 @@ body{
 }
 
 /* PNG КАРТОЧЕК */
-
-.card img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:contain;
-
-    display:block;
-
-    background:transparent;
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: transparent;
 }
 
-/* ЭФФЕКТ НАВЕДЕНИЯ */
+/* ЭФФЕКТ НАВЕДЕНИЯ (Только для устройств с мышкой) */
+@media (hover: hover) {
+    .card:hover {
+        transform: translateY(-8px) scale(1.02);
+        filter: brightness(1.03);
+        box-shadow:
+            0 18px 40px rgba(0,0,0,0.35),
+            0 0 24px rgba(255,220,190,0.18);
+    }
+}
 
-.card:hover{
-
-    transform:
-        translateY(-8px)
-        scale(1.02);
-
-    filter:brightness(1.03);
-
-    box-shadow:
-        0 18px 40px rgba(0,0,0,0.35),
-        0 0 24px rgba(255,220,190,0.18);
+/* НАВИГАЦИЯ С КЛАВИАТУРЫ */
+.card:focus-visible {
+    transform: translateY(-8px);
+    outline: 3px solid #ffdcbe;
+    outline-offset: 4px;
 }
 
 /* ПЛАНШЕТЫ */
+@media(max-width: 1100px) {
+    .cards {
+        width: 98vw;
+        gap: 10px;
+    }
 
-@media(max-width:1100px){
-
-.cards{
-    width:98vw;
-    gap:10px;
-}
-
-.card{
-    width:22vw;
-}
-
+    .card {
+        width: 22vw;
+    }
 }
 
 /* МОБИЛЬНАЯ ВЕРСИЯ */
+@media(max-width: 800px) {
+    body {
+        overflow: auto;
+        height: auto;
+    }
 
-@media(max-width:800px){
+    .hero {
+        min-height: 100vh;
+        height: auto;
+        background-size: cover;
+        padding-bottom: 40px;
+    }
 
-body{
-    overflow:auto;
+    .cards {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        transform: none;
+        width: 100%;
+        padding: 20px;
+        margin-top: 55vh;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        width: 42%;
+        max-width: none;
+    }
 }
 
-.hero{
-
-    min-height:100vh;
-    height:auto;
-
-    background-size:cover;
-
-    padding-bottom:40px;
+@media(max-width: 560px) {
+    .card {
+        width: 90%;
+    }
 }
-
-.cards{
-
-    position:relative;
-
-    left:auto;
-    bottom:auto;
-
-    transform:none;
-
-    width:100%;
-
-    padding:20px;
-
-    margin-top:60vh;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-}
-
-.card{
-    width:42%;
-    max-width:none;
-}
-
-}
-
-@media(max-width:560px){
-
-.card{
-    width:90%;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
 <section class="hero">
+    <h1 class="visually-hidden">Hearthshire — Главная</h1>
 
-<div class="cards">
+    <div class="cards">
+        <a href="estate.html" class="card">
+            <img src="estate-card.png" alt="The Estate" width="280" height="270">
+        </a>
 
-<a href="estate.html" class="card">
-<img src="estate-card.png" alt="The Estate">
-</a>
+        <a href="waterworks.html" class="card">
+            <img src="waterworks-card.png" alt="Waterworks" width="280" height="270">
+        </a>
 
-<a href="waterworks.html" class="card">
-<img src="waterworks-card.png" alt="Waterworks">
-</a>
+        <a href="garden.html" class="card">
+            <img src="garden-card.png" alt="Garden" width="280" height="270">
+        </a>
 
-<a href="garden.html" class="card">
-<img src="garden-card.png" alt="Garden">
-</a>
-
-<a href="chronicle.html" class="card">
-<img src="chronicle-card.png" alt="Chronicle">
-</a>
-
-</div>
-
+        <a href="chronicle.html" class="card">
+            <img src="chronicle-card.png" alt="Chronicle" width="280" height="270">
+        </a>
+    </div>
 </section>
 
 </body>

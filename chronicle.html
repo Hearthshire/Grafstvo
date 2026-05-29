@@ -8,11 +8,19 @@
 
 <style>
 
+/* =========================
+   СБРОС
+========================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
+
+/* =========================
+   BODY
+========================= */
 
 body{
     width:100%;
@@ -20,37 +28,44 @@ body{
 
     display:flex;
     justify-content:center;
-    align-items:center;
 
     background:
-        linear-gradient(rgba(20,12,10,.45), rgba(20,12,10,.45)),
+        linear-gradient(rgba(20,12,10,.40), rgba(20,12,10,.40)),
         url('hearthshire-sunset.png');
 
     background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
+    background-position:center top;
+    background-repeat:no-repeat;
 
     overflow-x:hidden;
 
     font-family:Georgia, serif;
 }
 
-/* ОСНОВНАЯ РАМКА */
+/* =========================
+   КОНТЕЙНЕР
+========================= */
 
 .chronicle-wrapper{
-    width:min(92vw, 1400px);
+
+    width:min(90vw, 1200px);
 
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start;
 
-    padding:40px 0;
+    padding:60px 0;
 }
 
-/* ИЗОБРАЖЕНИЕ РАМКИ */
+/* =========================
+   РАМКА
+========================= */
 
 .chronicle-frame{
+
     width:100%;
+    height:auto;
+
     display:block;
 
     filter:
@@ -59,7 +74,9 @@ body{
     animation:fadeIn 1.4s ease;
 }
 
-/* АНИМАЦИЯ */
+/* =========================
+   АНИМАЦИЯ
+========================= */
 
 @keyframes fadeIn{
 
@@ -75,13 +92,32 @@ body{
 
 }
 
-/* МОБИЛКА */
+/* =========================
+   ПЛАНШЕТЫ
+========================= */
+
+@media(max-width:1000px){
+
+    .chronicle-wrapper{
+        width:94vw;
+        padding:40px 0;
+    }
+
+}
+
+/* =========================
+   МОБИЛКА
+========================= */
 
 @media(max-width:800px){
 
+    body{
+        background-position:center top;
+    }
+
     .chronicle-wrapper{
         width:96vw;
-        padding:20px 0;
+        padding:24px 0;
     }
 
 }

@@ -42,13 +42,13 @@ body {
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url('hearthshire-sun.png'); /* Использование hearthshire-sun.png */
+    background-image: url('hearthshire-sun.png'); /* Новая основная фоновая картинка */
     background-size: cover; 
     background-position: top center; 
     background-repeat: no-repeat;
 }
 
-/* КОНТЕЙНЕР КАРТОЧЕК */
+/* КОНТЕЙНЕР КАРТОЧЕК (ДЕСКТОП) */
 .cards {
     position: absolute;
     left: 50%;
@@ -60,7 +60,7 @@ body {
     width: 95vw;
 }
 
-/* КАРТОЧКИ ПО УМОЛЧАНИЮ (ПРОЗРАЧНЫЕ) */
+/* КАРТОЧКИ (ПОЛНОСТЬЮ ПРОЗРАЧНЫЙ ФОН) */
 .card {
     display: block;
     width: 19vw;
@@ -71,14 +71,14 @@ body {
     cursor: pointer;
     outline: none;
     
-    /* НАЧАЛЬНАЯ ПРОЗРАЧНОСТЬ */
+    /* Начальная прозрачность самой PNG-карточки до наведения */
     opacity: 0.5;
 
-    /* ЭФФЕКТ СТЕКЛА */
-    background: transparent; /* Сделал фон прозрачным */
-    backdrop-filter: blur(12px);          
-    -webkit-backdrop-filter: blur(12px);  
-    border: 1px solid rgba(255, 255, 255, 0.1); 
+    /* ИЗМЕНЕНО: Фон сделан прозрачным, так как у вас готовые затененные PNG */
+    background: transparent; 
+    backdrop-filter: none;          
+    -webkit-backdrop-filter: none;  
+    border: none; 
     
     transition:
         transform .25s ease,
@@ -96,7 +96,7 @@ body {
     background: transparent;
 }
 
-/* ЭФФЕКТ НАВЕДЕНИЯ (СТАНОВЯТСЯ НЕПРОЗРАЧНЫМИ) */
+/* ЭФФЕКТ НАВЕДЕНИЯ (Мышь) */
 @media (hover: hover) {
     .card:hover {
         transform: translateY(-8px) scale(1.02);
@@ -104,8 +104,7 @@ body {
         box-shadow:
             0 18px 40px rgba(0,0,0,0.35),
             0 0 24px rgba(255,220,190,0.18);
-            
-        opacity: 1; /* Полная непрозрачность при наведении */
+        opacity: 1; /* При наведении карточка становится сочной и плотной */
     }
 }
 
@@ -123,23 +122,26 @@ body {
         width: 98vw;
         gap: 10px;
     }
-
     .card {
         width: 22vw;
     }
 }
 
-/* МОБИЛЬНАЯ ВЕРСИЯ */
+/* ИДЕАЛЬНАЯ МОБИЛЬНАЯ ВЕРСИЯ БЕЗ СТРОННИХ ФОНОВ */
 @media(max-width: 800px) {
     body {
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
         height: auto;
     }
 
     .hero {
-        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* Опускает сетку меню в нижнюю часть экрана */
         height: auto;
-        padding-bottom: 40px;
+        min-height: 100vh;
+        background-position: center top;
     }
 
     .cards {
@@ -147,25 +149,39 @@ body {
         left: auto;
         bottom: auto;
         transform: none;
+        
         width: 100%;
-        padding: 20px;
-        margin-top: 55vh;
-        flex-wrap: wrap;
-        justify-content: center;
+        margin-top: 40vh; /* Оставляет верхнюю часть экрана под чистый вид дома */
+        padding: 16px 16px 40px 16px;
+        
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Компактная сетка 2х2 */
+        gap: 12px;
+        
+        /* ИЗМЕНЕНО: Никаких градиентов и заливок, только чистый фон дома hearthshire-sun.png */
+        background: transparent; 
     }
 
     .card {
-        width: 42%;
+        width: 100%; 
         max-width: none;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        opacity: 0.75; /* Немного увеличил непрозрачность для мобильных */
+        
+        /* На смартфонах увеличиваем базовую видимость PNG, чтобы текст сразу хорошо читался */
+        opacity: 0.85; 
+        
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
     }
 }
 
-@media(max-width: 560px) {
-    .card {
-        width: 90%;
+/* Оптимизация для совсем узких экранов */
+@media(max-width: 400px) {
+    .cards {
+        margin-top: 30vh;
+        gap: 8px;
+        padding: 12px 8px 30px 8px;
     }
 }
 </style>

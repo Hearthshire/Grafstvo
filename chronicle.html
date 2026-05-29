@@ -7,7 +7,7 @@
 
 <style>
 /* =========================
-   СБРОС СТИЛЕЙ
+   1. СБРОС СТИЛЕЙ
 ========================= */
 * {
     margin: 0;
@@ -16,41 +16,69 @@
 }
 
 /* =========================
-   ФОН (Идеальное заполнение экрана)
+   2. БАЗОВЫЙ ФОН И ЭКРАН (ПК и Мониторы)
 ========================= */
 body {
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center; /* Центрируем книгу ровно посредине экрана */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     
-    /* Затемнение фона и сама картинка */
+    background-color: #1a110d; /* Маскировочный цвет под тон краев картинки */
     background-image: 
         linear-gradient(rgba(20, 12, 10, 0.20), rgba(20, 12, 10, 0.20)),
         url('chronicle-frame.png');
     
-    /* cover убирает полосы по бокам, растягивая картинку на 100% ширины и высоты */
+    /* Растягиваем картинку на весь экран, убирая пустые поля по бокам */
     background-size: cover; 
-    /* Фиксируем центр изображения, чтобы интерфейс не съезжал */
     background-position: center center; 
     background-repeat: no-repeat;
     
-    overflow: hidden; /* Отключаем прокрутку самого экрана */
+    overflow: hidden; /* Отключаем полосы прокрутки самого экрана для сохранения интерфейса */
     font-family: Georgia, serif;
     
     animation: fadeInBg 1s ease forwards;
 }
 
 /* =========================
-   КОНТЕЙНЕР ДЛЯ КОНТЕНТА ВНУТРИ КНИГИ
-   (Эта область прозрачна и наложена на страницы книги)
+   3. ВЕРХНЕЕ МЕНЮ (Навигация)
+========================= */
+/* Селекторы учитывают стандартные теги и классы, которые вы могли использовать */
+.nav-container, nav, .menu, [class*="nav"], [class*="menu"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 40px;
+    z-index: 10;
+    background: transparent;
+}
+
+/* Элементы внутри меню (иконка + текст под ней) */
+.nav-item, .menu-item, nav a, .nav-container a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: #ffdcbe; /* Примерный благородный цвет под ваш интерфейс */
+    margin: 0 15px;
+    transition: transform 0.3s ease;
+}
+
+.nav-item:hover, nav a:hover {
+    transform: scale(1.05);
+}
+
+/* =========================
+   4. КОНТЕЙНЕР ДЛЯ КОНТЕНТА ВНУТРИ КНИГИ
 ========================= */
 .chronicle-wrapper {
     width: 100%;
     max-width: 1200px;
-    height: 100%;
-    max-height: 800px;
+    height: calc(100vh - 80px); /* Вычитаем высоту меню */
     
     display: flex;
     flex-direction: column;
@@ -59,22 +87,59 @@ body {
     
     background: transparent; 
     
-    /* Процентные отступы, чтобы ваш текст, слайдер и стрелки 
-       всегда оставались внутри нарисованных страниц книги */
-    padding: 18% 12% 10% 12%; 
+    /* Процентные отступы, чтобы контент сидел строго внутри нарисованных страниц книги */
+    padding: 12% 12% 5% 12%; 
+    position: relative;
 }
 
 /* =========================
-   АНИМАЦИЯ ПОЯВЛЕНИЯ
+   5. АНИМАЦИЯ ПОЯВЛЕНИЯ
 ========================= */
 @keyframes fadeInBg {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+/* =========================
+   6. АДАПТИВНОСТЬ ПОД МОБИЛЬНЫЕ (Смартфоны и планшеты)
+========================= */
+@media (max-width: 800px) {
+    body {
+        overflow-y: auto; /* Позволяем мобильным устройствам скроллить страницу, если контент не влезает */
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* ИКОНКИ СТРОГО ПО ЦЕНТРУ НА МОБИЛКЕ */
+    .nav-container, nav, .menu, [class*="nav"], [class*="menu"] {
+        display: flex !important;
+        justify-content: center !important; 
+        align-items: center !important;     
+        flex-wrap: wrap !important; /* Если иконки не влезают в ряд, они красиво и центрированно переносятся */
+        gap: 15px 20px !important;                     
+        padding: 15px 10px !important;
+        margin: 0 auto !important;
+    }
+
+    .nav-item, .menu-item, nav a, .nav-container a {
+        margin: 0 !important;
+        min-width: 65px; 
+        font-size: 12px; /* Чуть уменьшаем шрифт для мобильных */
+    }
+
+    /* Адаптируем внутреннюю зону под узкий экран смартфона */
+    .chronicle-wrapper {
+        height: auto;
+        padding: 30% 8% 40px 8%; 
+    }
+}
 </style>
 </head>
 
 <body>
+
+    <nav class="nav-container">
+        </nav>
 
     <div class="chronicle-wrapper">
         </div>

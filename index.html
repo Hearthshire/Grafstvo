@@ -14,12 +14,12 @@
 }
 
 body{
-    background:#2f2426;
     overflow:hidden;
+    background:#2f2426;
     font-family:Georgia, serif;
 }
 
-/* ОСНОВНОЙ ЭКРАН */
+/* ОСНОВНОЙ ФОН */
 
 .hero{
     position:relative;
@@ -33,33 +33,33 @@ body{
     background-repeat:no-repeat;
 }
 
-/* КОНТЕЙНЕР КАРТОЧЕК */
+/* КАРТОЧКИ */
 
 .cards{
     position:absolute;
 
     left:50%;
-    bottom:2.2vw;
+    bottom:1.2vw;
 
     transform:translateX(-50%);
 
     display:flex;
-    gap:1.45vw;
-
-    width:88vw;
-
     justify-content:center;
+
+    gap:1vw;
+
+    width:92vw;
 }
 
-/* КАРТОЧКИ */
+/* САМИ КНОПКИ */
 
 .card{
     display:block;
 
-    width:21vw;
-    max-width:300px;
+    width:17vw;
+    max-width:340px;
 
-    aspect-ratio: 0.78 / 1;
+    aspect-ratio:1.18 / 1;
 
     border-radius:28px;
 
@@ -79,47 +79,58 @@ body{
     width:100%;
     height:100%;
 
-    object-fit:cover;
-
     display:block;
+
+    object-fit:cover;
 }
 
-/* HOVER */
+/* ЭФФЕКТ */
 
 .card:hover{
-    transform:translateY(-10px) scale(1.02);
+
+    transform:
+        translateY(-8px)
+        scale(1.02);
 
     filter:brightness(1.03);
 
     box-shadow:
-        0 18px 40px rgba(0,0,0,0.35),
-        0 0 25px rgba(255,220,190,0.18);
+        0 16px 34px rgba(0,0,0,0.35),
+        0 0 24px rgba(255,220,190,0.18);
+}
+
+/* ПЛАНШЕТЫ */
+
+@media(max-width:1100px){
+
+.cards{
+    width:96vw;
+    gap:12px;
+}
+
+.card{
+    width:21vw;
+}
+
 }
 
 /* МОБИЛКИ */
 
-@media(max-width:1200px){
+@media(max-width:800px){
 
-.cards{
-    gap:12px;
-    bottom:20px;
+body{
+    overflow:auto;
 }
-
-.card{
-    width:22vw;
-}
-
-}
-
-@media(max-width:900px){
 
 .hero{
-    height:auto;
     min-height:100vh;
+    height:auto;
+
     padding-bottom:40px;
 }
 
 .cards{
+
     position:relative;
 
     left:auto;
@@ -131,26 +142,24 @@ body{
 
     padding:20px;
 
-    margin-top:58vh;
+    margin-top:60vh;
 
     flex-wrap:wrap;
+
+    justify-content:center;
 }
 
 .card{
     width:42%;
+    max-width:none;
 }
 
 }
 
-@media(max-width:600px){
+@media(max-width:560px){
 
 .card{
     width:90%;
-    max-width:320px;
-}
-
-.cards{
-    justify-content:center;
 }
 
 }

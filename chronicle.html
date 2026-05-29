@@ -7,7 +7,7 @@
 
 <style>
 /* =========================
-   СБРОС
+   СБРОС СТИЛЕЙ
 ========================= */
 * {
     margin: 0;
@@ -16,7 +16,7 @@
 }
 
 /* =========================
-   BODY (Используем основной фон заката)
+   ФОН НА ВЕСЬ ЭКРАН
 ========================= */
 body {
     width: 100%;
@@ -24,74 +24,65 @@ body {
     display: flex;
     justify-content: center;
     
-    /* ИЗМЕНЕНО: Сюда ставим основной фон hearthshire-sun.png, чтобы сохранить единство стиля */
+    /* Установили chronicle-frame.png как главный и единственный фон */
     background: 
         linear-gradient(rgba(20, 12, 10, 0.40), rgba(20, 12, 10, 0.40)),
-        url('hearthshire-sun.png');
+        url('chronicle-frame.png');
     
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
+    background-size: cover;       /* Растягивает картинку, чтобы она закрыла весь экран */
+    background-position: center top; /* Центрирует фон */
+    background-repeat: no-repeat; /* Запрещает размножение картинки */
+    background-attachment: fixed; /* Фиксирует фон при скролле (опционально, для красоты) */
+    
     overflow-x: hidden;
     font-family: Georgia, serif;
+    
+    /* Анимация плавного появления самого фона при загрузке */
+    animation: fadeInBg 1.4s ease forwards;
 }
 
 /* =========================
-   КОНТЕЙНЕР
+   КОНТЕЙНЕР ДЛЯ КОНТЕНТА
 ========================= */
 .chronicle-wrapper {
     width: min(90vw, 1200px);
+    min-height: 80vh;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 60px 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+    /* Делаем область прозрачной, так как рамка теперь на фоне */
+    background: transparent; 
+    padding: 60px 20px;
 }
 
 /* =========================
-   РАМКА ХРОНИКИ (Единственная и неповторимая)
+   АНИМАЦИЯ ПОЯВЛЕНИЯ ФОНА
 ========================= */
-.chronicle-frame {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.55));
-    animation: fadeIn 1.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* =========================
-   АНИМАЦИЯ
-========================= */
-@keyframes fadeIn {
+@keyframes fadeInBg {
     from {
         opacity: 0;
-        transform: translateY(20px) scale(.98);
     }
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
     }
 }
 
 /* =========================
-   ПЛАНШЕТЫ
+   АДАПТИВНОСТЬ ПОД ЭКРАНЫ
 ========================= */
 @media(max-width: 1000px) {
     .chronicle-wrapper {
         width: 94vw;
-        padding: 40px 0;
+        padding: 40px 15px;
     }
 }
 
-/* =========================
-   МОБИЛКА
-========================= */
 @media(max-width: 800px) {
-    body {
-        background-position: center top;
-    }
     .chronicle-wrapper {
         width: 96vw;
-        padding: 24px 0;
+        padding: 24px 10px;
     }
 }
 </style>
@@ -99,13 +90,8 @@ body {
 
 <body>
 
-<div class="chronicle-wrapper">
-    <img 
-        src="chronicle-frame.png" 
-        alt="Chronicle" 
-        class="chronicle-frame"
-    >
-</div>
+    <div class="chronicle-wrapper">
+        </div>
 
 </body>
 </html>

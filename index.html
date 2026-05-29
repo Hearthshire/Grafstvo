@@ -42,7 +42,7 @@ body {
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url('hearthshire-sun.png');
+    background-image: url('heartshire-home.png');
     background-size: cover; /* Картинка на весь экран */
     background-position: top center; 
     background-repeat: no-repeat;
@@ -60,7 +60,7 @@ body {
     width: 95vw;
 }
 
-/* КАРТОЧКИ (ЭФФЕКТ СТЭКЛА) */
+/* КАРТОЧКИ ПО УМОЛЧАНИЮ (ПОЛУПРОЗРАЧНЫЕ) */
 .card {
     display: block;
     width: 19vw;
@@ -71,17 +71,21 @@ body {
     cursor: pointer;
     outline: none;
     
-    /* СТИЛИ СТЕКЛА (GLASSMORPHISM) */
-    background: rgba(255, 255, 255, 0.07); /* Очень легкая белая подложка для проявления стекла */
-    backdrop-filter: blur(12px);          /* Размытие того, что НАХОДИТСЯ ЗА карточкой */
-    -webkit-backdrop-filter: blur(12px);  /* Поддержка для Safari */
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Тонкая стеклянная грань по краям */
+    /* НАЧАЛЬНАЯ ПРОЗРАЧНОСТЬ */
+    opacity: 0.5;
+
+    /* ЭФФЕКТ СТЕКЛА (Остается полупрозрачным) */
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(12px);          
+    -webkit-backdrop-filter: blur(12px);  
+    border: 1px solid rgba(255, 255, 255, 0.1); 
     
+    /* Плавный переход для всех измененных свойств, включая opacity */
     transition:
         transform .25s ease,
         filter .25s ease,
         box-shadow .25s ease,
-        background .25s ease;
+        opacity .25s ease;
 }
 
 /* PNG КАРТОЧЕК */
@@ -93,23 +97,26 @@ body {
     background: transparent;
 }
 
-/* ЭФФЕКТ НАВЕДЕНИЯ (Только для устройств с мышкой) */
+/* ЭФФЕКТ НАВЕДЕНИЯ (СТАНОВЯТСЯ СВЕТЛЫМИ И ЧЕТКИМИ) */
 @media (hover: hover) {
     .card:hover {
         transform: translateY(-8px) scale(1.02);
-        background: rgba(255, 255, 255, 0.12); /* Стекло становится чуть плотнее при наведении */
-        filter: brightness(1.05);
+        filter: brightness(1.03);
         box-shadow:
-            0 20px 40px rgba(0,0,0,0.4),
-            0 0 20px rgba(255,220,190,0.15);
+            0 18px 40px rgba(0,0,0,0.35),
+            0 0 24px rgba(255,220,190,0.18);
+            
+        /* ПОЛНАЯ НЕПРОЗРАЧНОСТЬ ПРИ НАВЕДЕНИИ КУРСОРA */
+        opacity: 1;
     }
 }
 
-/* НАВИГАЦИЯ С КЛАВИАТУРЫ */
+/* НАВИГАЦИЯ С КЛАВИАТУРЫ И АКТИВНЫЙ ФОКУС */
 .card:focus-visible {
     transform: translateY(-8px);
     outline: 3px solid #ffdcbe;
     outline-offset: 4px;
+    opacity: 1;
 }
 
 /* ПЛАНШЕТЫ */
@@ -152,7 +159,8 @@ body {
     .card {
         width: 42%;
         max-width: none;
-        /* На мобильных можно сделать размытие чуть меньше для экономии батареи смартфона */
+        /* На смартфонах увеличиваем базовую прозрачность, чтобы текст оставался читабельным без наведения мыши */
+        opacity: 0.75;
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
     }

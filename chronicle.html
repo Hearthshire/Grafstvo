@@ -26,12 +26,12 @@ body {
     justify-content: flex-start;
     align-items: center;
     
-    background-color: #1a110d; /* Маскировочный цвет под тон краев картинки */
+    background-color: #1a110d; /* Цвет-подложка под тон краев вашей картинки */
     background-image: 
         linear-gradient(rgba(20, 12, 10, 0.20), rgba(20, 12, 10, 0.20)),
         url('chronicle-frame.png');
     
-    /* Растягиваем картинку на весь экран, убирая пустые поля по бокам */
+    /* Идеальное заполнение экрана без пустых полос по бокам */
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat;
@@ -45,104 +45,34 @@ body {
 /* =========================
    3. ВЕРХНЕЕ МЕНЮ (Навигация)
 ========================= */
-/* Селекторы учитывают стандартные теги и классы, которые вы могли использовать */
+/* Жесткая фиксация панели на переднем плане поверх книги на ПК */
 .nav-container, nav, .menu, [class*="nav"], [class*="menu"] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px 40px;
-    z-index: 10;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    
+    width: 100% !important;
+    height: 80px !important; 
+    padding: 0 40px !important;
+    z-index: 9999 !important; /* Выталкивает меню на самый верхний слой */
     background: transparent;
 }
 
-/* Элементы внутри меню (иконка + текст под ней) */
+/* Элементы внутри меню (иконка + текст) */
 .nav-item, .menu-item, nav a, .nav-container a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    text-decoration: none;
-    color: #ffdcbe; /* Примерный благородный цвет под ваш интерфейс */
-    margin: 0 15px;
-    transition: transform 0.3s ease;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    color: #ffdcbe !important; 
+    margin: 0 25px !important; /* Комфортный отступ между кнопками */
+    transition: transform 0.3s ease !important;
 }
 
-.nav-item:hover, nav a:hover {
-    transform: scale(1.05);
-}
-
-/* =========================
-   4. КОНТЕЙНЕР ДЛЯ КОНТЕНТА ВНУТРИ КНИГИ
-========================= */
-.chronicle-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    height: calc(100vh - 80px); /* Вычитаем высоту меню */
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    
-    background: transparent; 
-    
-    /* Процентные отступы, чтобы контент сидел строго внутри нарисованных страниц книги */
-    padding: 12% 12% 5% 12%; 
-    position: relative;
-}
-
-/* =========================
-   5. АНИМАЦИЯ ПОЯВЛЕНИЯ
-========================= */
-@keyframes fadeInBg {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* =========================
-   6. АДАПТИВНОСТЬ ПОД МОБИЛЬНЫЕ (Смартфоны и планшеты)
-========================= */
-@media (max-width: 800px) {
-    body {
-        overflow-y: auto; /* Позволяем мобильным устройствам скроллить страницу, если контент не влезает */
-        height: auto;
-        min-height: 100vh;
-    }
-
-    /* ИКОНКИ СТРОГО ПО ЦЕНТРУ НА МОБИЛКЕ */
-    .nav-container, nav, .menu, [class*="nav"], [class*="menu"] {
-        display: flex !important;
-        justify-content: center !important; 
-        align-items: center !important;     
-        flex-wrap: wrap !important; /* Если иконки не влезают в ряд, они красиво и центрированно переносятся */
-        gap: 15px 20px !important;                     
-        padding: 15px 10px !important;
-        margin: 0 auto !important;
-    }
-
-    .nav-item, .menu-item, nav a, .nav-container a {
-        margin: 0 !important;
-        min-width: 65px; 
-        font-size: 12px; /* Чуть уменьшаем шрифт для мобильных */
-    }
-
-    /* Адаптируем внутреннюю зону под узкий экран смартфона */
-    .chronicle-wrapper {
-        height: auto;
-        padding: 30% 8% 40px 8%; 
-    }
-}
-</style>
-</head>
-
-<body>
-
-    <nav class="nav-container">
-        </nav>
-
-    <div class="chronicle-wrapper">
-        </div>
-
-</body>
-</html>
+.nav-item:hover, nav a:hover, .nav-container a:hover {
+    transform: scale(1.05

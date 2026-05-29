@@ -20,6 +20,8 @@ html {
 body {
     width: 100%; 
     height: 100vh;
+    display: flex;
+    flex-direction: column; /* Выстраиваем фон и плашку вертикально */
     overflow: hidden;
     background: #4a2f35;
     font-family: Georgia, serif;
@@ -37,28 +39,30 @@ body {
     border: 0;
 }
 
-/* ОСНОВНОЙ ФОН С ГРАДИЕНТОМ */
+/* ОСНОВНОЙ ФОН */
 .hero {
     position: relative;
     width: 100%;
-    height: 100vh;
-    
-    /* ЭФФЕКТ: Сначала накладывается темный градиент, а под ним — картинка */
-    background-image: 
-        linear-gradient(to top, rgba(15, 10, 12, 0.9) 0%, rgba(15, 10, 12, 0.5) 25%, rgba(15, 10, 12, 0) 60%), 
-        url('heartshire-home.png');
-        
-    background-size: cover; /* Растягивает картинку на весь экран */
-    background-position: top center; /* Фиксирует верхнюю часть изображения */
+    flex-grow: 1; /* Занимает всё оставшееся пространство сверху от плашки */
+    background-image: url('heartshire-home.png');
+    background-size: cover; 
+    background-position: top center; 
     background-repeat: no-repeat;
+}
+
+/* НОВАЯ ОДНОТОННАЯ ПОДЛОЖКА ВНИЗУ */
+.cards-wrapper {
+    width: 100%;
+    background: #4a2f35; /* Фирменный темно-коричневый цвет */
+    padding: 4vh 0; /* Внутренние отступы сверху и снизу от карточек */
+    box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.4); /* Мягкая тень, отделяющая плашку от арта */
+    display: flex;
+    justify-content: center;
+    z-index: 10;
 }
 
 /* КОНТЕЙНЕР КАРТОЧЕК */
 .cards {
-    position: absolute;
-    left: 50%;
-    bottom: 7vh;
-    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     gap: 0.8vw;
@@ -70,7 +74,7 @@ body {
     display: block;
     width: 19vw;
     max-width: 280px; 
-    aspect-ratio: 280 / 270; /* Идеальное соотношение сторон под ваши размеры */
+    aspect-ratio: 280 / 270; /* Пропорции ваших картинок 280х270 */
     border-radius: 14px;
     overflow: hidden;
     cursor: pointer;
@@ -96,8 +100,8 @@ body {
         transform: translateY(-8px) scale(1.02);
         filter: brightness(1.03);
         box-shadow:
-            0 18px 40px rgba(0,0,0,0.45),
-            0 0 24px rgba(255,220,190,0.25);
+            0 14px 30px rgba(0,0,0,0.4),
+            0 0 20px rgba(255,220,190,0.15);
     }
 }
 
@@ -128,23 +132,17 @@ body {
     }
 
     .hero {
-        min-height: 100vh;
-        height: auto;
-        padding-bottom: 40px;
-        /* На мобильных градиент растягиваем повыше, так как карточки встают друг под друга */
-        background-image: 
-            linear-gradient(to top, rgba(15, 10, 12, 0.95) 0%, rgba(15, 10, 12, 0.7) 40%, rgba(15, 10, 12, 0) 85%), 
-            url('heartshire-home.png');
+        height: 50vh; /* На мобильных отдаем картинке ровно половину экрана */
+        flex-grow: 0;
+    }
+
+    .cards-wrapper {
+        padding: 20px;
+        box-shadow: none;
     }
 
     .cards {
-        position: relative;
-        left: auto;
-        bottom: auto;
-        transform: none;
         width: 100%;
-        padding: 20px;
-        margin-top: 55vh;
         flex-wrap: wrap;
         justify-content: center;
     }
@@ -165,27 +163,29 @@ body {
 
 <body>
 
-<section class="hero">
-    <h1 class="visually-hidden">Hearthshire — Главная</h1>
+    <section class="hero">
+        <h1 class="visually-hidden">Hearthshire — Главная</h1>
+    </section>
 
-    <div class="cards">
-        <a href="estate.html" class="card">
-            <img src="estate-card.png" alt="The Estate" width="280" height="270">
-        </a>
+    <div class="cards-wrapper">
+        <div class="cards">
+            <a href="estate.html" class="card">
+                <img src="estate-card.png" alt="The Estate" width="280" height="270">
+            </a>
 
-        <a href="waterworks.html" class="card">
-            <img src="waterworks-card.png" alt="Waterworks" width="280" height="270">
-        </a>
+            <a href="waterworks.html" class="card">
+                <img src="waterworks-card.png" alt="Waterworks" width="280" height="270">
+            </a>
 
-        <a href="garden.html" class="card">
-            <img src="garden-card.png" alt="Garden" width="280" height="270">
-        </a>
+            <a href="garden.html" class="card">
+                <img src="garden-card.png" alt="Garden" width="280" height="270">
+            </a>
 
-        <a href="chronicle.html" class="card">
-            <img src="chronicle-card.png" alt="Chronicle" width="280" height="270">
-        </a>
+            <a href="chronicle.html" class="card">
+                <img src="chronicle-card.png" alt="Chronicle" width="280" height="270">
+            </a>
+        </div>
     </div>
-</section>
 
 </body>
 </html>

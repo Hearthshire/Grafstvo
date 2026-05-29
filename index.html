@@ -21,11 +21,10 @@ body {
     width: 100%; 
     height: 100vh;
     overflow: hidden;
-    background: #4a2f35;
+    background: #0f0a0c; /* Сделали базовый фон чуть темнее для красивого проявления */
     font-family: Georgia, serif;
 }
 
-/* Скрытый заголовок для SEO */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -37,18 +36,21 @@ body {
     border: 0;
 }
 
-/* ОСНОВНОЙ ФОН */
+/* ОСНОВНОЙ ФОН С АНИМАЦИЕЙ ПОЯВЛЕНИЯ */
 .hero {
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url('hearthshire-sun.png'); /* Новая основная фоновая картинка */
+    background-image: url('hearthshire-sun.png');
     background-size: cover; 
     background-position: top center; 
     background-repeat: no-repeat;
+    
+    /* Элемент улучшения 2: Плавное проявление */
+    animation: fadeInBackground 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* КОНТЕЙНЕР КАРТОЧЕК (ДЕСКТОП) */
+/* КОНТЕЙНЕР КАРТОЧЕК */
 .cards {
     position: absolute;
     left: 50%;
@@ -58,9 +60,13 @@ body {
     justify-content: center;
     gap: 0.8vw;
     width: 95vw;
+    z-index: 5;
+    
+    /* Плавное появление карточек чуть позже фона */
+    animation: fadeInCards 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.4s both;
 }
 
-/* КАРТОЧКИ (ПОЛНОСТЬЮ ПРОЗРАЧНЫЙ ФОН) */
+/* КАРТОЧКИ (ПОЛИРОВКА СТИЛЯ) */
 .card {
     display: block;
     width: 19vw;
@@ -70,24 +76,22 @@ body {
     overflow: hidden;
     cursor: pointer;
     outline: none;
+    background: transparent;
     
-    /* Начальная прозрачность самой PNG-карточки до наведения */
-    opacity: 0.5;
-
-    /* ИЗМЕНЕНО: Фон сделан прозрачным, так как у вас готовые затененные PNG */
-    background: transparent; 
-    backdrop-filter: none;          
-    -webkit-backdrop-filter: none;  
-    border: none; 
+    /* Элемент улучшения 4: вместо жесткого opacity уходим в изящную атмосферную дымку */
+    opacity: 0.6;
+    filter: contrast(0.95) brightness(0.9);
+    
+    /* Элемент улучшения 3: подготовка видеокарты к плавной анимации */
+    will-change: transform, opacity, filter;
     
     transition:
-        transform .25s ease,
-        filter .25s ease,
-        box-shadow .25s ease,
-        opacity .25s ease;
+        transform .4s cubic-bezier(0.25, 1, 0.5, 1),
+        filter .4s cubic-bezier(0.25, 1, 0.5, 1),
+        box-shadow .4s cubic-bezier(0.25, 1, 0.5, 1),
+        opacity .4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* PNG КАРТОЧЕК */
 .card img {
     width: 100%;
     height: 100%;
@@ -96,24 +100,24 @@ body {
     background: transparent;
 }
 
-/* ЭФФЕКТ НАВЕДЕНИЯ (Мышь) */
+/* ЭФФЕКТ НАВЕДЕНИЯ (Улучшенный, более глубокий) */
 @media (hover: hover) {
     .card:hover {
-        transform: translateY(-8px) scale(1.02);
-        filter: brightness(1.03);
+        transform: translateY(-12px) scale(1.03); /* Чуть выше и объемнее */
+        filter: contrast(1) brightness(1.05);
+        opacity: 1;
         box-shadow:
-            0 18px 40px rgba(0,0,0,0.35),
-            0 0 24px rgba(255,220,190,0.18);
-        opacity: 1; /* При наведении карточка становится сочной и плотной */
+            0 20px 45px rgba(0, 0, 0, 0.4),
+            0 0 30px rgba(255, 210, 170, 0.2); /* Теплое свечение под цвет заката */
     }
 }
 
-/* НАВИГАЦИЯ С КЛАВИАТУРЫ */
 .card:focus-visible {
-    transform: translateY(-8px);
+    transform: translateY(-12px);
     outline: 3px solid #ffdcbe;
     outline-offset: 4px;
     opacity: 1;
+    filter: contrast(1) brightness(1.05);
 }
 
 /* ПЛАНШЕТЫ */
@@ -127,7 +131,7 @@ body {
     }
 }
 
-/* ИДЕАЛЬНАЯ МОБИЛЬНАЯ ВЕРСИЯ БЕЗ СТРОННИХ ФОНОВ */
+/* МОБИЛЬНАЯ ВЕРСИЯ (ВАШ ПРЕДЫДУЩИЙ ИДЕАЛЬНЫЙ ВАРИАНТ) */
 @media(max-width: 800px) {
     body {
         overflow-x: hidden;
@@ -138,10 +142,11 @@ body {
     .hero {
         display: flex;
         flex-direction: column;
-        justify-content: flex-end; /* Опускает сетку меню в нижнюю часть экрана */
+        justify-content: flex-end;
         height: auto;
         min-height: 100vh;
         background-position: center top;
+        animation: fadeInBackground 1.2s ease-out forwards;
     }
 
     .cards {
@@ -149,39 +154,61 @@ body {
         left: auto;
         bottom: auto;
         transform: none;
-        
         width: 100%;
-        margin-top: 40vh; /* Оставляет верхнюю часть экрана под чистый вид дома */
+        margin-top: 40vh; 
         padding: 16px 16px 40px 16px;
-        
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Компактная сетка 2х2 */
+        grid-template-columns: 1fr 1fr; 
         gap: 12px;
-        
-        /* ИЗМЕНЕНО: Никаких градиентов и заливок, только чистый фон дома hearthshire-sun.png */
-        background: transparent; 
+        background: transparent;
+        animation: fadeInCards 1s ease-out 0.2s both;
     }
 
     .card {
         width: 100%; 
         max-width: none;
-        
-        /* На смартфонах увеличиваем базовую видимость PNG, чтобы текст сразу хорошо читался */
-        opacity: 0.85; 
-        
+        opacity: 0.9; 
+        filter: none;
         background: transparent;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border: none;
     }
 }
 
-/* Оптимизация для совсем узких экранов */
 @media(max-width: 400px) {
     .cards {
-        margin-top: 30vh;
+        margin-top: 32vh;
         gap: 8px;
         padding: 12px 8px 30px 8px;
+    }
+}
+
+/* КИНЕМАТОГРАФИЧНЫЕ АНИМАЦИИ ВХОДА */
+@keyframes fadeInBackground {
+    from {
+        opacity: 0;
+        transform: scale(1.03); /* Легкий наплыв камеры при старте */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInCards {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px); /* Карточки мягко приподнимаются из небытия */
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Для мобильных анимация карточек без сдвига по оси X */
+@media(max-width: 800px) {
+    @keyframes fadeInCards {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 }
 </style>

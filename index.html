@@ -20,8 +20,6 @@ html {
 body {
     width: 100%; 
     height: 100vh;
-    display: flex;
-    flex-direction: column; /* Выстраиваем фон и плашку вертикально */
     overflow: hidden;
     background: #4a2f35;
     font-family: Georgia, serif;
@@ -43,46 +41,47 @@ body {
 .hero {
     position: relative;
     width: 100%;
-    flex-grow: 1; /* Занимает всё оставшееся пространство сверху от плашки */
+    height: 100vh;
     background-image: url('heartshire-home.png');
-    background-size: cover; 
+    background-size: cover; /* Картинка на весь экран */
     background-position: top center; 
     background-repeat: no-repeat;
 }
 
-/* НОВАЯ ОДНОТОННАЯ ПОДЛОЖКА ВНИЗУ */
-.cards-wrapper {
-    width: 100%;
-    background: #4a2f35; /* Фирменный темно-коричневый цвет */
-    padding: 4vh 0; /* Внутренние отступы сверху и снизу от карточек */
-    box-shadow: 0 -15px 35px rgba(0, 0, 0, 0.4); /* Мягкая тень, отделяющая плашку от арта */
-    display: flex;
-    justify-content: center;
-    z-index: 10;
-}
-
 /* КОНТЕЙНЕР КАРТОЧЕК */
 .cards {
+    position: absolute;
+    left: 50%;
+    bottom: 7vh;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
     gap: 0.8vw;
     width: 95vw;
 }
 
-/* КАРТОЧКИ */
+/* КАРТОЧКИ (ЭФФЕКТ СТЭКЛА) */
 .card {
     display: block;
     width: 19vw;
     max-width: 280px; 
-    aspect-ratio: 280 / 270; /* Пропорции ваших картинок 280х270 */
+    aspect-ratio: 280 / 270; 
     border-radius: 14px;
     overflow: hidden;
     cursor: pointer;
     outline: none;
+    
+    /* СТИЛИ СТЕКЛА (GLASSMORPHISM) */
+    background: rgba(255, 255, 255, 0.07); /* Очень легкая белая подложка для проявления стекла */
+    backdrop-filter: blur(12px);          /* Размытие того, что НАХОДИТСЯ ЗА карточкой */
+    -webkit-backdrop-filter: blur(12px);  /* Поддержка для Safari */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Тонкая стеклянная грань по краям */
+    
     transition:
         transform .25s ease,
         filter .25s ease,
-        box-shadow .25s ease;
+        box-shadow .25s ease,
+        background .25s ease;
 }
 
 /* PNG КАРТОЧЕК */
@@ -98,9 +97,10 @@ body {
 @media (hover: hover) {
     .card:hover {
         transform: translateY(-8px) scale(1.02);
-        filter: brightness(1.03);
+        background: rgba(255, 255, 255, 0.12); /* Стекло становится чуть плотнее при наведении */
+        filter: brightness(1.05);
         box-shadow:
-            0 14px 30px rgba(0,0,0,0.4),
+            0 20px 40px rgba(0,0,0,0.4),
             0 0 20px rgba(255,220,190,0.15);
     }
 }
@@ -132,17 +132,19 @@ body {
     }
 
     .hero {
-        height: 50vh; /* На мобильных отдаем картинке ровно половину экрана */
-        flex-grow: 0;
-    }
-
-    .cards-wrapper {
-        padding: 20px;
-        box-shadow: none;
+        min-height: 100vh;
+        height: auto;
+        padding-bottom: 40px;
     }
 
     .cards {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        transform: none;
         width: 100%;
+        padding: 20px;
+        margin-top: 55vh;
         flex-wrap: wrap;
         justify-content: center;
     }
@@ -150,6 +152,9 @@ body {
     .card {
         width: 42%;
         max-width: none;
+        /* На мобильных можно сделать размытие чуть меньше для экономии батареи смартфона */
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 }
 
@@ -163,29 +168,27 @@ body {
 
 <body>
 
-    <section class="hero">
-        <h1 class="visually-hidden">Hearthshire — Главная</h1>
-    </section>
+<section class="hero">
+    <h1 class="visually-hidden">Hearthshire — Главная</h1>
 
-    <div class="cards-wrapper">
-        <div class="cards">
-            <a href="estate.html" class="card">
-                <img src="estate-card.png" alt="The Estate" width="280" height="270">
-            </a>
+    <div class="cards">
+        <a href="estate.html" class="card">
+            <img src="estate-card.png" alt="The Estate" width="280" height="270">
+        </a>
 
-            <a href="waterworks.html" class="card">
-                <img src="waterworks-card.png" alt="Waterworks" width="280" height="270">
-            </a>
+        <a href="waterworks.html" class="card">
+            <img src="waterworks-card.png" alt="Waterworks" width="280" height="270">
+        </a>
 
-            <a href="garden.html" class="card">
-                <img src="garden-card.png" alt="Garden" width="280" height="270">
-            </a>
+        <a href="garden.html" class="card">
+            <img src="garden-card.png" alt="Garden" width="280" height="270">
+        </a>
 
-            <a href="chronicle.html" class="card">
-                <img src="chronicle-card.png" alt="Chronicle" width="280" height="270">
-            </a>
-        </div>
+        <a href="chronicle.html" class="card">
+            <img src="chronicle-card.png" alt="Chronicle" width="280" height="270">
+        </a>
     </div>
+</section>
 
 </body>
 </html>

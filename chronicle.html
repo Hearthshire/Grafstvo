@@ -16,136 +16,175 @@
 }
 
 /* =========================
-   2. БАЗОВЫЙ ФОН И ЭКРАН (ПК и Мониторы)
+   2. ОБЩИЙ ФОН ЭКРАНА
 ========================= */
 body {
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     
-    background-color: #1a110d; /* Цвет-подложка под тон краев картинки */
-    background-image: 
-        linear-gradient(rgba(20, 12, 10, 0.20), rgba(20, 12, 10, 0.20)),
-        url('chronicle-frame.png');
+    /* Используем глубокий темный цвет, чтобы убрать полосы по бокам */
+    background-color: #160e0b; 
     
-    /* Бесшовное заполнение экрана без пустых полос по бокам */
-    background-size: cover; 
-    background-position: center center; 
+    /* Вторичный фон: та же картинка, но растянутая на весь экран для бесшовности */
+    background-image: 
+        linear-gradient(rgba(22, 14, 11, 0.40), rgba(22, 14, 11, 0.40)),
+        url('chronicle-frame.png');
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
     
-    overflow: hidden; /* Фиксируем интерфейс на ПК */
+    overflow: hidden; 
     font-family: Georgia, serif;
-    
-    animation: fadeInBg 1s ease forwards;
 }
 
 /* =========================
-   3. ВЕРХНЕЕ МЕНЮ (Навигация)
+   3. ГЛАВНЫЙ КОНТЕЙНЕР КНИГИ
 ========================= */
-.nav-container, nav, .menu, [class*="nav"], [class*="menu"] {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+.chronicle-container {
+    position: relative;
+    /* Книга займет максимум высоты экрана, не обрезая меню сверху */
+    height: 96vh; 
+    aspect-ratio: 1920 / 1080; /* Сохраняем оригинальные пропорции твоей картинки */
+    max-width: 100vw;
     
-    position: absolute !important;
-    /* Опустили ниже, чтобы ссылки легли на деревянную рамку и не перекрывали верхний текст */
-    top: 35px !important; 
-    left: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
-    width: 100% !important;
-    height: 60px !important; 
-    padding: 0 40px !important;
-    z-index: 9999 !important; /* Меню гарантированно поверх всего контента */
-    background: transparent;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    animation: fadeIn 1s ease forwards;
 }
 
-/* Ссылки внутри меню */
-.nav-item, .menu-item, nav a, .nav-container a {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    text-decoration: none !important;
-    color: #e0caaf !important; /* Винтажный песочно-золотой цвет */
-    margin: 0 25px !important; 
-    transition: all 0.3s ease !important;
-}
-
-/* Иконки-символы над текстом кнопок */
-.nav-icon {
-    font-size: 20px !important;
-    margin-bottom: 6px !important;
-    color: #cca573 !important;
-}
-
-.nav-item span {
-    font-size: 13px !important;
-    letter-spacing: 1px !important;
-    text-transform: uppercase;
-}
-
-/* Эффект наведения мышки */
-.nav-item:hover, nav a:hover, .nav-container a:hover {
-    transform: translateY(-2px) scale(1.03) !important;
-    color: #ffffff !important;
-}
-.nav-item:hover .nav-icon {
-    color: #ffdfb3 !important;
-}
-
-/* Стиль для активной страницы (Chronicle) */
-.nav-item.active {
-    color: #ffdfb3 !important;
-    border-bottom: 1px solid #cca573;
-    padding-bottom: 2px;
+/* Сама подложка интерфейса */
+.bg-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Картинка сжимается ювелирно, сохраняя иконки */
+    z-index: 1;
 }
 
 /* =========================
-   4. КОНТЕЙНЕР ДЛЯ КОНТЕНТА ВНУТРИ КНИГИ
+   4. НЕВИДИМАЯ НАВИГАЦИЯ (Поверх нарисованных иконок)
+========================= */
+.nav-overlay {
+    position: absolute;
+    /* Точное позиционирование в области, где нарисованы твои иконки */
+    top: 2%; 
+    left: 35%;
+    width: 38%;
+    height: 6%;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    background: transparent; /* Полностью прозрачная */
+}
+
+/* Кликабельные зоны для каждой иконки */
+.nav-link {
+    width: 22%;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+/* Подсветка при наведении (опционально, можно убрать) */
+.nav-link:hover {
+    background: rgba(255, 220, 190, 0.08); 
+}
+
+/* =========================
+   5. ОБЛАСТЬ ДЛЯ ТВОЕГО СЛАЙДЕРА И ТЕКСТА
 ========================= */
 .chronicle-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    height: calc(100vh - 110px);
-    /* Компенсируем новое, более низкое положение навигации */
-    margin-top: 110px; 
+    position: absolute;
+    /* Позиционируем контент точно на страницы раскрытой книги */
+    top: 14%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
     
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    z-index: 10;
+    background: transparent;
     
-    background: transparent; 
-    /* Процентные отступы удерживают ваш слайдер и текст строго на страницах книги */
-    padding: 8% 12% 5% 12%; 
-    position: relative;
-    z-index: 1;
+    /* Отступы внутри страниц */
+    padding: 2% 4%;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 /* =========================
-   5. АНИМАЦИЯ ПОЯВЛЕНИЯ
-========================= */
-@keyframes fadeInBg {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* =========================
-   6. ИДЕАЛЬНАЯ АДАПТИВНОСТЬ ПОД МОБИЛЬНЫЕ
+   6. АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ
 ========================= */
 @media (max-width: 800px) {
     body {
-        overflow-y: auto; /* Позволяем скроллить контент на телефонах */
+        overflow-y: auto;
         height: auto;
-        min-height: 100vh;
     }
+    .chronicle-container {
+        height: auto;
+        aspect-ratio: auto;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
+    .bg-frame {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+    .nav-overlay {
+        top: 15px;
+        left: 5%;
+        width: 90%;
+        height: 40px;
+    }
+    .chronicle-wrapper {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+}
+</style>
+</head>
 
-    /* ИКОНКИ СТРОГО ПО ЦЕНТРУ ЭКРАНА НА СМАРТФОНАХ */
-    .nav-container, nav, .menu, [class*="nav"], [class*="menu"] {
-        position: relative !important; 
-        top: 0 !important;
-        height: auto !important;
-        display: flex !important
+<body>
+
+    <div class="chronicle-container">
+        
+        <img src="chronicle-frame.png" alt="Interface" class="bg-frame">
+
+        <nav class="nav-overlay">
+            <a href="estate.html" class="nav-link" title="The Estate"></a>
+            <a href="waterworks.html" class="nav-link" title="Waterworks"></a>
+            <a href="garden.html" class="nav-link" title="Garden"></a>
+            <a href="chronicle.html" class="nav-link" title="Chronicle"></a>
+        </nav>
+
+        <div class="chronicle-wrapper">
+            </div>
+
+    </div>
+
+</body>
+</html>

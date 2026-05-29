@@ -14,20 +14,28 @@
 }
 
 body{
+
+    width:100vw;
+    height:100vh;
+
     overflow:hidden;
-    background:#2f2426;
+
+    background:#4a2f35;
+
     font-family:Georgia, serif;
 }
 
 /* ОСНОВНОЙ ФОН */
 
 .hero{
+
     position:relative;
 
     width:100vw;
     height:100vh;
 
     background-image:url('heartshire-home.png');
+
     background-size:contain;
     background-position:top center;
     background-repeat:no-repeat;
@@ -40,7 +48,7 @@ body{
     position:absolute;
 
     left:50%;
-    bottom:7vh; /* подняли карточки выше */
+    bottom:7vh;
 
     transform:translateX(-50%);
 
@@ -58,8 +66,8 @@ body{
 
     display:block;
 
-    width:10vw;
-    max-width:350px;
+    width:19vw;
+    max-width:380px;
 
     aspect-ratio:1.35 / 1;
 
@@ -75,19 +83,21 @@ body{
         box-shadow .25s ease;
 }
 
-/* PNG */
+/* PNG КАРТОЧЕК */
 
 .card img{
 
     width:100%;
     height:100%;
 
-    object-fit:cover;
+    object-fit:contain;
 
     display:block;
+
+    background:transparent;
 }
 
-/* HOVER */
+/* ЭФФЕКТ НАВЕДЕНИЯ */
 
 .card:hover{
 
@@ -127,8 +137,8 @@ body{
 
 .hero{
 
-    height:auto;
     min-height:100vh;
+    height:auto;
 
     background-size:cover;
 

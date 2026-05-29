@@ -16,42 +16,44 @@
 }
 
 /* =========================
-   BODY (Умная адаптация фона)
+   ФОН (Идеальное масштабирование под монитор)
 ========================= */
 body {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh; /* Строго фиксируем высоту по экрану */
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Позволяет контенту скроллиться вниз, если он большой */
+    align-items: center; /* Центрируем контент ровно посередине монитора */
     
-    /* Базовый цвет под цвет рамки, чтобы при адаптации не было белых полей */
-    background-color: #140c0a; 
+    /* Темный цвет-подложка в тон краев картинки на случай очень широких экранов */
+    background-color: #1a110d; 
     
     background-image: 
         linear-gradient(rgba(20, 12, 10, 0.20), rgba(20, 12, 10, 0.20)),
         url('chronicle-frame.png');
     
-    /* ИЗМЕНЕНО: На десктопах используем cover для заполнения, центрируем по верху */
-    background-size: cover;
-    background-position: center top;
+    /* ИЗМЕНЕНО: Отказываемся от грубого cover. 
+       contain гарантирует, что картинка ВСЕГДА полностью поместится в окно браузера */
+    background-size: contain; 
+    background-position: center center; /* Ровно по центру */
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Задник зафиксирован, контент плывет сверху */
     
-    overflow-x: hidden;
+    overflow: hidden; /* Убираем лишние полосы прокрутки, так как это цельный интерфейс */
     font-family: Georgia, serif;
     
-    animation: fadeInBg 1.2s ease forwards;
+    animation: fadeInBg 1s ease forwards;
 }
 
 /* =========================
-   КОНТЕЙНЕР ДЛЯ ТЕКСТА
-   (Подстраивается под изгибы рамки)
+   КОНТЕЙНЕР ДЛЯ КОНТЕНТА ВНУТРИ КНИГИ
+   (Позиционируется точно под внутреннее окошко рамки)
 ========================= */
 .chronicle-wrapper {
-    width: min(85vw, 1100px);
-    min-height: 90vh;
-    margin: 40px auto;
+    /* Автоматически подстраиваем размер контентной зоны под размеры фоновой книги */
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    max-height: 800px;
     
     display: flex;
     flex-direction: column;
@@ -60,12 +62,12 @@ body {
     
     background: transparent; 
     
-    /* Внутренние отступы, чтобы текст не вылезал за границы нарисованной рамки */
-    padding: 80px 60px; 
+    /* Отступы, чтобы ваш будущий текст/кнопки/слайдер ложились строго внутрь страниц раскрытой книги */
+    padding: 18% 12% 10% 12%; 
 }
 
 /* =========================
-   АНИМАЦИЯ
+   АНИМАЦИЯ ПОЯВЛЕНИЯ
 ========================= */
 @keyframes fadeInBg {
     from { opacity: 0; }
@@ -73,44 +75,12 @@ body {
 }
 
 /* =========================
-   АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ
+   АДАПТИВНОСТЬ (Если монитор слишком узкий/вертикальный)
 ========================= */
-@media(max-width: 1024px) {
+@media (max-aspect-ratio: 16/10) {
     body {
-        /* Переключаем на contain, чтобы на планшетах рамка вошла ПЕРЕМЕННО целиком */
-        background-size: contain;
-        background-attachment: scroll; /* На мобильных fixed-фоны часто лагают */
-    }
-    
-    .chronicle-wrapper {
-        width: 90vw;
-        padding: 60px 40px;
-        margin: 20px auto;
-    }
-}
-
-/* =========================
-   ИДЕАЛЬНАЯ МОБИЛЬНАЯ ВЕРСИЯ (Смартфоны)
-========================= */
-@media(max-width: 600px) {
-    body {
-        /* На телефонах 'contain' гарантирует, что пропорции картинки не нарушатся */
-        background-size: 100% auto; 
-        background-position: center top;
-    }
-    
-    .chronicle-wrapper {
-        width: 95vw;
-        /* Уменьшаем отступы, так как на смартфонах рамка становится уже */
-        padding: 45px 20px 30px 20px; 
-        margin: 10px auto;
-    }
-}
-
-/* Для совсем маленьких экранов */
-@media(max-width: 400px) {
-    .chronicle-wrapper {
-        padding: 35px 15px 20px 15px;
+        /* Если монитор квадратный или нестандартный, плавно адаптируем размер */
+        background-size: 100% auto;
     }
 }
 </style>

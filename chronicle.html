@@ -26,16 +26,17 @@ body {
     justify-content: flex-start;
     align-items: center;
     
-    background-color: #1a110d; 
+    background-color: #1a110d; /* Цвет-подложка под тон краев картинки */
     background-image: 
         linear-gradient(rgba(20, 12, 10, 0.20), rgba(20, 12, 10, 0.20)),
         url('chronicle-frame.png');
     
+    /* Бесшовное заполнение экрана без пустых полос по бокам */
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat;
     
-    overflow: hidden; 
+    overflow: hidden; /* Фиксируем интерфейс на ПК */
     font-family: Georgia, serif;
     
     animation: fadeInBg 1s ease forwards;
@@ -44,49 +45,50 @@ body {
 /* =========================
    3. ВЕРХНЕЕ МЕНЮ (Навигация)
 ========================= */
-.nav-container {
+.nav-container, nav, .menu, [class*="nav"], [class*="menu"] {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     
     position: absolute !important;
-    top: 0 !important;
+    /* Опустили ниже, чтобы ссылки легли на деревянную рамку и не перекрывали верхний текст */
+    top: 35px !important; 
     left: 0 !important;
     
     width: 100% !important;
-    height: 90px !important; 
+    height: 60px !important; 
     padding: 0 40px !important;
-    z-index: 9999 !important; /* Гарантирует отображение поверх книги */
-    background: linear-gradient(to bottom, rgba(26,17,13,0.8), rgba(26,17,13,0)); /* Мягкая тень сверху */
+    z-index: 9999 !important; /* Меню гарантированно поверх всего контента */
+    background: transparent;
 }
 
-/* Элементы меню (ссылки) */
-.nav-item {
+/* Ссылки внутри меню */
+.nav-item, .menu-item, nav a, .nav-container a {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     text-align: center !important;
     text-decoration: none !important;
-    color: #e0caaf !important; /* Благородный песочно-золотой цвет */
-    margin: 0 30px !important; 
+    color: #e0caaf !important; /* Винтажный песочно-золотой цвет */
+    margin: 0 25px !important; 
     transition: all 0.3s ease !important;
 }
 
-/* Декоративные иконки над текстом */
+/* Иконки-символы над текстом кнопок */
 .nav-icon {
     font-size: 20px !important;
     margin-bottom: 6px !important;
-    color: #cca573 !important; /* Выделяем иконки золотым цветом */
+    color: #cca573 !important;
 }
 
 .nav-item span {
-    font-size: 14px !important;
+    font-size: 13px !important;
     letter-spacing: 1px !important;
-    text-transform: uppercase; /* Делаем текст строгим */
+    text-transform: uppercase;
 }
 
-/* Эффект наведения */
-.nav-item:hover {
+/* Эффект наведения мышки */
+.nav-item:hover, nav a:hover, .nav-container a:hover {
     transform: translateY(-2px) scale(1.03) !important;
     color: #ffffff !important;
 }
@@ -94,7 +96,7 @@ body {
     color: #ffdfb3 !important;
 }
 
-/* Выделение активной страницы (Chronicle) */
+/* Стиль для активной страницы (Chronicle) */
 .nav-item.active {
     color: #ffdfb3 !important;
     border-bottom: 1px solid #cca573;
@@ -107,8 +109,9 @@ body {
 .chronicle-wrapper {
     width: 100%;
     max-width: 1200px;
-    height: calc(100vh - 90px);
-    margin-top: 90px; 
+    height: calc(100vh - 110px);
+    /* Компенсируем новое, более низкое положение навигации */
+    margin-top: 110px; 
     
     display: flex;
     flex-direction: column;
@@ -116,6 +119,7 @@ body {
     align-items: center;
     
     background: transparent; 
+    /* Процентные отступы удерживают ваш слайдер и текст строго на страницах книги */
     padding: 8% 12% 5% 12%; 
     position: relative;
     z-index: 1;
@@ -130,74 +134,18 @@ body {
 }
 
 /* =========================
-   6. АДАПТИВНОСТЬ ПОД МОБИЛЬНЫЕ
+   6. ИДЕАЛЬНАЯ АДАПТИВНОСТЬ ПОД МОБИЛЬНЫЕ
 ========================= */
 @media (max-width: 800px) {
     body {
-        overflow-y: auto; 
+        overflow-y: auto; /* Позволяем скроллить контент на телефонах */
         height: auto;
         min-height: 100vh;
     }
 
-    .nav-container {
+    /* ИКОНКИ СТРОГО ПО ЦЕНТРУ ЭКРАНА НА СМАРТФОНАХ */
+    .nav-container, nav, .menu, [class*="nav"], [class*="menu"] {
         position: relative !important; 
+        top: 0 !important;
         height: auto !important;
-        flex-wrap: wrap !important; 
-        gap: 15px 10px !important;                     
-        padding: 25px 10px 10px 10px !important;
-        background: rgba(26,17,13,0.9) !important; /* Плотный фон для мобильного меню */
-    }
-
-    .nav-item {
-        margin: 0 10px !important;
-        min-width: 75px; 
-    }
-    
-    .nav-icon {
-        font-size: 18px !important;
-    }
-
-    .nav-item span {
-        font-size: 11px !important;
-    }
-
-    .chronicle-wrapper {
-        margin-top: 0;
-        height: auto;
-        padding: 10% 6% 40px 6%; 
-    }
-}
-</style>
-</head>
-
-<body>
-
-    <nav class="nav-container">
-        
-        <a href="estate.html" class="nav-item">
-            <span class="nav-icon">🏰</span>
-            <span>The Estate</span>
-        </a>
-        
-        <a href="waterworks.html" class="nav-item">
-            <span class="nav-icon">💧</span>
-            <span>Waterworks</span>
-        </a>
-        
-        <a href="garden.html" class="nav-item">
-            <span class="nav-icon">🌿</span>
-            <span>Garden</span>
-        </a>
-        
-        <a href="chronicle.html" class="nav-item active">
-            <span class="nav-icon">✨</span>
-            <span>Chronicle</span>
-        </a>
-        
-    </nav>
-
-    <div class="chronicle-wrapper">
-        </div>
-
-</body>
-</html>
+        display: flex !important

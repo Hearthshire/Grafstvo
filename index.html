@@ -1,112 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Hearthshire</title>
 
 <style>
 
-body {
-    margin: 0;
-    font-family: Georgia, serif;
-    overflow: hidden;
-    background: #2f2426;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-header {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-
-    background-image:
-        linear-gradient(
-            rgba(0,0,0,0.12),
-            rgba(0,0,0,0.28)
-        ),
-        url('hearthshire-set.png');
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+body{
+    overflow:hidden;
+    background:#2f2426;
+    font-family:Georgia, serif;
 }
 
-/* Контейнер */
+/* ОСНОВНОЙ ЭКРАН */
 
-.hotspots {
-    position: absolute;
-    inset: 0;
+.hero{
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    background-image:url('hearthshire-background.png');
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 }
 
-/* Карточки */
+/* КОНТЕЙНЕР КАРТОЧЕК */
 
-.hotspot {
-    position: absolute;
-    cursor: pointer;
+.cards{
+    position:absolute;
 
-    border-radius: 22px;
+    left:50%;
+    bottom:6.5%;
 
-    background: rgba(103, 74, 70, 0.82);
+    transform:translateX(-50%);
 
-    backdrop-filter: blur(4px);
+    display:flex;
+    gap:26px;
+}
 
-    box-shadow:
-        0 8px 24px rgba(0,0,0,0.25);
+/* КЛИКАБЕЛЬНЫЕ PNG КАРТОЧКИ */
+
+.card{
+    display:block;
+
+    width:295px;
+    height:430px;
+
+    border-radius:28px;
+
+    overflow:hidden;
 
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
+        transform .25s ease,
+        filter .25s ease;
+
+    cursor:pointer;
 }
 
-.hotspot:hover {
-    transform: translateY(-4px);
+.card:hover{
+    transform:translateY(-6px);
 
-    box-shadow:
-        0 12px 30px rgba(0,0,0,0.35);
-
-    background: rgba(120, 88, 84, 0.9);
+    filter:brightness(1.03);
 }
 
-/* The Estate */
+.card img{
+    width:100%;
+    height:100%;
 
-.estate {
-    left: 13%;
-    bottom: 10%;
+    object-fit:cover;
 
-    width: 16%;
-    height: 18%;
-}
-
-/* Waterworks */
-
-.waterworks {
-    left: 32%;
-    bottom: 10%;
-
-    width: 16%;
-    height: 18%;
-}
-
-/* Garden */
-
-.garden {
-    left: 51%;
-    bottom: 10%;
-
-    width: 16%;
-    height: 18%;
-}
-
-/* Chronicle */
-
-.chronicle {
-    left: 70%;
-    bottom: 10%;
-
-    width: 16%;
-    height: 18%;
+    display:block;
 }
 
 </style>
@@ -114,21 +88,29 @@ header {
 
 <body>
 
-<header>
+<section class="hero">
 
-<div class="hotspots">
+<div class="cards">
 
-<a href="#" class="hotspot estate"></a>
+<a href="estate.html" class="card">
+    <img src="estate-card.png" alt="The Estate">
+</a>
 
-<a href="#" class="hotspot waterworks"></a>
+<a href="waterworks.html" class="card">
+    <img src="waterworks-card.png" alt="Waterworks">
+</a>
 
-<a href="#" class="hotspot garden"></a>
+<a href="garden.html" class="card">
+    <img src="garden-card.png" alt="Garden">
+</a>
 
-<a href="#" class="hotspot chronicle"></a>
+<a href="chronicle.html" class="card">
+    <img src="chronicle-card.png" alt="Chronicle">
+</a>
 
 </div>
 
-</header>
+</section>
 
 </body>
 </html>
